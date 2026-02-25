@@ -7,10 +7,12 @@
     <link rel="icon" type="image/x-icon" href="Assets/image/icon.ico">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/bg.css">
-    <link rel="stylesheet" href="assets/music/music.css">    
+    <link rel="stylesheet" href="assets/music/music.css">  
+    <link rel="stylesheet" href="assets/css/inup.css">  
 </head>
-
-<?php include 'bg.php'; ?>
+<body>
+    
+    <?php include 'bg.php'; ?>
 
     <?php 
     $page = "HOME";
@@ -18,11 +20,8 @@
     ?>
 
     <?php include 'assets/music/music.php'; ?>
-<body>
-   
 
     <div class="card-container">
-
         <div class="main-card">
             <p class="card-title">Gym Availability</p>
             <menu class="card-menu">
@@ -45,9 +44,10 @@
             <p class="card-title">Upcoming Events</p>
             <p>None scheduled</p>
         </div>
-
     </div>
 
+    <?php include 'Signin.php'; ?>
+    <script src="assets/js/signin.js"></script>
     <?php include 'footer.php'; ?>
 
 </body>
