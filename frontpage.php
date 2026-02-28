@@ -25,7 +25,8 @@
         <div class="main-card">
             <p class="card-title"> WELCOME TO</p>
             <img src="Assets/image/logo.png" alt="Mojo Jojo's Logo" class="logo">
-            <p>papajejek!</p>
+            <!-- added inline css as well as small description bwahahahhahahaaha -->
+            <p style="font-size: small; padding-bottom: 20px; color: #92ff77;">A friendly and motivating  place where everyone can work toward a healthier and stronger lifestyle!</p>
 
             <button class="Btn"><a href="HOME.php" id="start-btn">Get Started</a></button>
         </div>

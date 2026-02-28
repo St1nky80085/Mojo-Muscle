@@ -1,0 +1,194 @@
+/* home.css — shared across Home, Dashboard */
+
+/* ── ANNOUNCEMENT ── */
+.announcement-banner {
+    background: linear-gradient(90deg, #4a148c, #2d1b69);
+    border-bottom: 2px solid #92ff77;
+    color: #92ff77;
+    padding: 11px 20px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    z-index: 100;
+}
+.dismiss-btn {
+    background: none;
+    border: 1px solid #92ff77;
+    color: #92ff77;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+.dismiss-btn:hover { background: #92ff77; color: #1a1a1a; }
+
+/* ── HOME ACTION BUTTONS ── */
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 0 0 50px;
+}
+.btn-outline-purple, .btn-outline-green {
+    padding: 11px 26px;
+    border-radius: 40px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 0.84rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.25s;
+    display: inline-block;
+}
+.btn-outline-purple { color: #cfb2ff; border: 2px solid #9757ff; }
+.btn-outline-purple:hover { background: #9757ff; color: #fff; box-shadow: 0 0 16px rgba(151,95,255,0.4); }
+.btn-outline-green  { color: #92ff77;  border: 2px solid #92ff77; }
+.btn-outline-green:hover  { background: #92ff77; color: #111; }
+
+/* ── HOME CARDS ── */
+.stat-number { font-size: 3rem !important; font-weight: 900 !important; color: #92ff77 !important; margin: 10px 0 5px !important; }
+.stat-label  { color: #888 !important; font-size: 0.85rem !important; }
+.card-menu li { display: flex; justify-content: space-between; }
+
+/* ── TODAY DATETIME ── */
+.today-datetime {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    background: rgba(146,255,119,0.05);
+    border: 1px solid rgba(146,255,119,0.18);
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #92ff77;
+}
+
+/* ── GYM HOURS ── */
+.hours-li { display: flex; justify-content: space-between; align-items: center; }
+.hours-day-label { display: flex; align-items: center; gap: 5px; font-size: 0.88rem; }
+.status-dot { font-size: 0.65rem; }
+.hours-value { font-size: 0.85rem; }
+.day-closed .hours-day-label { text-decoration: line-through; color: #555; }
+.closed-label { color: #ff6b6b; font-weight: bold; font-size: 0.78rem; text-decoration: none !important; }
+
+.hours-li.today-row {
+    background: rgba(146,255,119,0.07);
+    border: 1px solid rgba(146,255,119,0.25);
+    border-radius: 5px;
+    padding: 5px 8px;
+    margin: 2px 0;
+}
+.hours-li.today-row .hours-day-label,
+.hours-li.today-row .hours-value { color: #92ff77 !important; font-weight: bold; }
+.hours-li.today-row.day-closed { background: rgba(255,77,77,0.06); border-color: rgba(255,77,77,0.25); }
+.hours-li.today-row.day-closed .hours-day-label,
+.hours-li.today-row.day-closed .hours-value { color: #ff6b6b !important; }
+
+.hours-li.other-day { opacity: 0.38; padding: 3px 8px; }
+.hours-li.other-day:hover { opacity: 0.7; transition: opacity 0.2s; }
+
+.today-indicator { color: #92ff77; font-size: 0.6rem; }
+.today-tag {
+    background: #92ff77; color: #111;
+    font-size: 0.56rem; font-weight: 900;
+    padding: 1px 6px; border-radius: 30px;
+    margin-left: 4px; letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    vertical-align: middle;
+}
+
+/* ── DASHBOARD ── */
+.dash-wrapper  { max-width: 1080px; margin: 30px auto 60px; padding: 0 20px; display: flex; flex-direction: column; gap: 22px; }
+.dash-section  { display: flex; gap: 22px; flex-wrap: wrap; }
+.dash-card {
+    background: rgba(0,0,0,0.28);
+    border: 1px solid #2a0a5e;
+    border-bottom: 3px solid #4a148c;
+    border-radius: 8px;
+    padding: 26px;
+    flex: 1;
+    min-width: 260px;
+    transition: border-bottom-color 0.25s, transform 0.25s;
+}
+.dash-card:hover { border-bottom-color: #9757ff; transform: translateY(-3px); }
+.full-width { flex: 1 1 100%; }
+
+.profile-card  { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.profile-avatar { font-size: 3.5rem; }
+.profile-name  { color: #92ff77; font-size: 1.4rem; margin: 0 0 3px; font-family: 'Courier New', monospace; }
+.profile-email { color: #cfb2ff; font-size: 0.82rem; margin: 0 0 3px; font-family: 'Courier New', monospace; }
+.profile-joined { color: #555; font-size: 0.75rem; margin: 0; font-family: 'Courier New', monospace; }
+.dash-settings-link { display: inline-block; margin-top: 8px; font-size: 0.76rem; color: #9757ff; font-family: 'Courier New', monospace; text-decoration: none; }
+.dash-settings-link:hover { color: #cfb2ff; }
+
+.mem-badge { display: inline-block; border: 2px solid; border-radius: 40px; padding: 7px 18px; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 14px; font-family: 'Courier New', monospace; }
+.mem-detail { display: flex; justify-content: space-between; font-size: 0.83rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #ccc; font-family: 'Courier New', monospace; }
+.mem-bar-wrap { margin-top: 12px; }
+.mem-bar { background: rgba(0,0,0,0.4); border-radius: 40px; height: 6px; overflow: hidden; margin-bottom: 4px; }
+.mem-bar-fill { height: 100%; border-radius: 40px; transition: width 0.5s; }
+.mem-bar-wrap small { color: #555; font-size: 0.72rem; font-family: 'Courier New', monospace; }
+
+.upgrade-link { display: inline-block; margin-top: 14px; font-size: 0.8rem; font-family: 'Courier New', monospace; text-decoration: none; font-weight: bold; transition: opacity 0.2s; }
+.upgrade-link:hover { opacity: 0.7; }
+.upgrade-notice { background: rgba(151,95,255,0.07); border: 1px solid #2a0a5e; border-left: 3px solid #4a148c; border-radius: 6px; padding: 12px 16px; color: #cfb2ff; font-size: 0.83rem; font-family: 'Courier New', monospace; margin-bottom: 18px; }
+
+/* ── CLASSES GRID ── */
+.classes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 14px; margin-top: 12px; }
+.class-card {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid #2a0a5e;
+    border-bottom: 3px solid #4a148c;
+    border-radius: 7px;
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 5px;
+    transition: border-bottom-color 0.25s, transform 0.2s;
+}
+.class-card:hover { border-bottom-color: #9757ff; transform: translateY(-2px); }
+.class-card.booked { border-bottom-color: #92ff77; background: rgba(146,255,119,0.04); }
+.class-card.closed-class { opacity: 0.5; border-bottom-color: #ff4d4d; }
+.class-card.full { opacity: 0.5; }
+.class-day   { font-size: 0.67rem; color: #9757ff; letter-spacing: 2px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+.class-name  { font-size: 0.95rem; font-weight: bold; color: #92ff77; font-family: 'Courier New', monospace; }
+.class-meta  { font-size: 0.76rem; color: #888; font-family: 'Courier New', monospace; }
+.class-slots { font-size: 0.78rem; font-weight: bold; color: #ccc; margin-top: 3px; font-family: 'Courier New', monospace; }
+.class-slots.low { color: #ff6b6b; }
+.class-status-badge { display: inline-block; padding: 2px 9px; border-radius: 30px; font-size: 0.68rem; font-weight: bold; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+.class-status-badge.open   { background: rgba(146,255,119,0.1); color: #92ff77; border: 1px solid rgba(146,255,119,0.3); }
+.class-status-badge.closed { background: rgba(255,77,77,0.1);   color: #ff6b6b; border: 1px solid rgba(255,77,77,0.3); }
+.class-btn { margin-top: 6px; background: #9757ff; color: #fff; border: none; padding: 8px; border-radius: 40px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; font-family: 'Courier New', monospace; }
+.class-btn:hover:not([disabled]) { box-shadow: 0 0 10px rgba(151,95,255,0.4); transform: scale(1.03); }
+.class-btn[disabled] { background: #222; color: #555; cursor: not-allowed; }
+.cancel-btn { background: #3a0a7e; }
+.cancel-btn:hover { background: #ff4d4d !important; }
+
+/* ── TOAST ── */
+.mojo-toast {
+    position: fixed; bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: rgba(0,0,0,0.88);
+    padding: 11px 26px;
+    border-radius: 40px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem; font-weight: bold;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+    z-index: 999999; opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    border: 2px solid #4a148c;
+    white-space: nowrap; max-width: 90vw; text-align: center;
+}
+.mojo-toast.show    { opacity: 1; transform: translateX(-50%) translateY(0); }
+.mojo-toast.success { border-color: #92ff77; color: #92ff77; }
+.mojo-toast.error   { border-color: #ff6b6b; color: #ff6b6b; }
