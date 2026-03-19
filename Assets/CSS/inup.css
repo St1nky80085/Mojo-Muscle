@@ -1,262 +1,237 @@
 
-/* --- POP-UP MODAL STYLES --- */
-.modal-overlay {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7); 
-    backdrop-filter: blur(8px); 
-    z-index: 10000; 
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+  /* --- POP-UP MODAL STYLES --- */
+  .modal-overlay {
+      display: none; 
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7); 
+      backdrop-filter: blur(8px); 
+      z-index: 10000; 
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  }
 
-.modal-overlay.show {
+  .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+  }
+
+  .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: #92ff77; 
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s;
+  }
+
+  .close-modal:hover {
+      color: #cfb2ff; 
+      transform: scale(1.2);
+  }
+
+  .modal-overlay .form-container {
+      margin: 0 !important; 
+  }
+
+  .form-container {
+    position: relative;
+    perspective: 50rem;
+    width: 100%;
+    max-width: 330px; 
+    height: 32rem; 
+    margin: auto;     
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .hidden-radio {
+    display: none;
+  }
+
+  /* Updated to include the new forgot password form */
+  .sign-up-form,
+  .log-in-form,
+  .forgot-pwd-form {
     display: flex;
-    opacity: 1;
-}
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly; 
+  }
 
-.close-modal {
+  /* Updated to include the new forgot password container */
+  .sign-up-container,
+  .log-in-container,
+  .forgot-pwd-container {
     position: absolute;
-    top: 20px;
-    right: 40px;
-    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: #2d2d2d;
+    color: #e0e0e0;
+    padding: 2rem; 
+    border: 2px solid #4a148c;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.2); 
+    box-sizing: border-box; 
+  }
+
+  .form-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
     color: #92ff77; 
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
 
-.close-modal:hover {
+  .switch-label {
+    font-size: 0.8rem;
+    text-align: center;
     color: #cfb2ff; 
-    transform: scale(1.2);
-}
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
 
-.modal-overlay .form-container {
-    margin: 0 !important; 
-}
+  .switch-label:hover {
+    color: #92ff77;
+  }
 
-.form-container {
-  position: relative;
-  perspective: 50rem;
-  width: 100%;
-  max-width: 330px; 
-  height: 32rem; 
-  margin: auto;     
-  font-family: 'Courier New', Courier, monospace;
-}
+  :where(.sign-up-form, .log-in-form, .forgot-pwd-form) label {
+    font-size: 0.8rem;
+    padding-left: 0.25rem;
+    color: #cfb2ff;
+    margin-top: 2px;
+  }
 
-.hidden-radio {
-  display: none;
-}
+  :where(.sign-up-form, .log-in-form, .forgot-pwd-form) input {
+    background-color: rgba(0, 0, 0, 0.3); 
+    box-sizing: border-box;
+    color: white;
+    border: none;
+    border-bottom: 2px solid #4a148c; 
+    padding: 0.6rem;
+    border-radius: 4px 4px 0 0;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+  }
 
-/* Updated to include the new forgot password form */
-.sign-up-form,
-.log-in-form,
-.forgot-pwd-form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-evenly; 
-}
+  :where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus-visible {
+    outline: none;
+    border-bottom: 2px solid #92ff77; 
+    background-color: rgba(151, 95, 255, 0.1); 
+  }
 
-/* Updated to include the new forgot password container */
-.sign-up-container,
-.log-in-container,
-.forgot-pwd-container {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  inset: 0;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  background: #2d2d2d;
-  color: #e0e0e0;
-  padding: 1.5rem; 
-  border: 2px solid #4a148c;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 230, 118, 0.2); 
-  box-sizing: border-box; 
-}
+  :where(.sign-up-form, .log-in-form, .forgot-pwd-form) button {
+    margin-top: 10px;
+    background-color: rgb(151, 95, 255);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 45px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgba(5, 5, 5, 0.212);
+    transition: all 0.3s ease;
+  }
 
-.form-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  text-align: center;
-  color: #92ff77; 
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 0;
-}
+  :where(.sign-up-form, .log-in-form, .forgot-pwd-form) button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(151, 95, 255, 0.6);
+  }
 
-.switch-label {
-  font-size: 0.8rem;
-  text-align: center;
-  color: #cfb2ff; 
-  text-decoration: underline;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  transition: color 0.3s;
-}
+  label.forgot-pwd {
+    font-size: 0.75rem;
+    text-decoration: underline;
+    color: #cfb2ff;
+    margin-left: auto;
+    cursor: pointer;
+  }
 
-.switch-label:hover {
-  color: #92ff77;
-}
+  label.forgot-pwd:hover {
+    color: #92ff77;
+  }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) label {
-  font-size: 0.8rem;
-  padding-left: 0.25rem;
-  color: #cfb2ff;
-  margin-top: 2px;
-}
+  .social-message .message {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.75rem;
+    color: #cfb2ff;
+  }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input {
-  background-color: rgba(0, 0, 0, 0.3); 
-  box-sizing: border-box;
-  color: white;
-  border: none;
-  border-bottom: 2px solid #4a148c; 
-  padding: 0.6rem;
-  border-radius: 4px 4px 0 0;
-  font-family: inherit;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
+  /* --- THE 3D FLIP ANIMATIONS --- */
+  .sign-up-container,
+  .log-in-container,
+  .forgot-pwd-container {
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, visibility 0.6s;
+    backface-visibility: hidden;
+  }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus-visible {
-  outline: none;
-  border-bottom: 2px solid #92ff77; 
-  background-color: rgba(151, 95, 255, 0.1); 
-}
+  /* BASE HIDDEN STATES */
+  .log-in-container,
+  .sign-up-container,
+  .forgot-pwd-container {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+  }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button {
-  margin-top: 10px;
-  background-color: rgb(151, 95, 255);
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 45px;
-  font-weight: bold;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(5, 5, 5, 0.212);
-  transition: all 0.3s ease;
-}
+  /* 1. LOGIN ACTIVE STATE */
+  #nav-login:checked ~ .log-in-container {
+    transform: rotateY(0deg) rotateX(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+  #nav-login:checked ~ .sign-up-container { transform: rotateY(-180deg); } /* Pushed to the back */
+  #nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); } /* Pushed to the bottom */
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(151, 95, 255, 0.6);
-}
+  /* 2. SIGN UP ACTIVE STATE */
+  #nav-signup:checked ~ .sign-up-container {
+    transform: rotateY(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+  #nav-signup:checked ~ .log-in-container { transform: rotateY(180deg); }
+  #nav-signup:checked ~ .forgot-pwd-container { transform: rotateX(180deg); }
 
-label.forgot-pwd {
-  font-size: 0.75rem;
-  text-decoration: underline;
-  color: #cfb2ff;
-  margin-left: auto;
-  cursor: pointer;
-}
+  /* 3. FORGOT PASSWORD ACTIVE STATE */
+  #nav-forgot:checked ~ .forgot-pwd-container {
+    transform: rotateX(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+  #nav-forgot:checked ~ .log-in-container { transform: rotateX(-180deg); }
+  #nav-forgot:checked ~ .sign-up-container { transform: rotateY(-180deg); }
 
-label.forgot-pwd:hover {
-  color: #92ff77;
-}
+/*mao ni ako gi usab para ma visible ang color. gi butngan nako !important kay para ma override tanan*/
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input::placeholder {
+      color: #ccc !important;
+      opacity: 1 !important;
+      font-style: italic;
+      font-size: 1rem; 
+  }
 
-/* Social Login Area */
-.social-message {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+.sign-up-form button,
+.log-in-form button,
+.forgot-pwd-form button {
+    margin-top: 20px;             
 }
-
-.line {
-  height: 1px;
-  flex: 1 1 0%;
-  background-color: #4a148c; 
-}
-
-.social-message .message {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  font-size: 0.75rem;
-  color: #cfb2ff;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
-}
-
-.social-icons .icon {
-  background-color: transparent;
-  box-shadow: none;
-  border-radius: 50%;
-  padding: 0.4rem;
-  margin: 0 5px;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.social-icons .icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  background-color: rgba(146, 255, 119, 0.1);
-}
-
-.social-icons .icon svg {
-  height: 1.2rem;
-  width: 1.2rem;
-  fill: #92ff77; 
-}
-
-/* --- THE 3D FLIP ANIMATIONS --- */
-.sign-up-container,
-.log-in-container,
-.forgot-pwd-container {
-  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, visibility 0.6s;
-  backface-visibility: hidden;
-}
-
-/* BASE HIDDEN STATES */
-.log-in-container,
-.sign-up-container,
-.forgot-pwd-container {
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1;
-}
-
-/* 1. LOGIN ACTIVE STATE */
-#nav-login:checked ~ .log-in-container {
-  transform: rotateY(0deg) rotateX(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-}
-#nav-login:checked ~ .sign-up-container { transform: rotateY(-180deg); } /* Pushed to the back */
-#nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); } /* Pushed to the bottom */
-
-/* 2. SIGN UP ACTIVE STATE */
-#nav-signup:checked ~ .sign-up-container {
-  transform: rotateY(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-}
-#nav-signup:checked ~ .log-in-container { transform: rotateY(180deg); }
-#nav-signup:checked ~ .forgot-pwd-container { transform: rotateX(180deg); }
-
-/* 3. FORGOT PASSWORD ACTIVE STATE */
-#nav-forgot:checked ~ .forgot-pwd-container {
-  transform: rotateX(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-}
-#nav-forgot:checked ~ .log-in-container { transform: rotateX(-180deg); }
-#nav-forgot:checked ~ .sign-up-container { transform: rotateY(-180deg); }
