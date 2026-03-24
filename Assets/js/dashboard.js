@@ -1,43 +1,53 @@
-// =============================================
-// THE MOJO MUSCLE - dashboard.js
-// Requires: showToast() from signin.js (included via Signin.php)
-//           getSiteRoot() from signin.js
-// =============================================
+// dashboard.js
 
-document.querySelectorAll('.book-btn').forEach(function(btn) {
-    btn.addEventListener('click', async function() {
-        var classId = this.dataset.id;
-        this.textContent = 'BOOKING...'; this.disabled = true;
-        try {
-            var fd = new FormData();
-            fd.append('action', 'book'); fd.append('class_id', classId);
-            var res  = await fetch(getSiteRoot() + 'handlers/booking.php', { method: 'POST', body: fd });
-            var data = JSON.parse(await res.text());
+function showToast(message, type) {
+    var toast = document.getElementById('mojo-toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.className   = 'mojo-toast ' + (type || '');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 3500);
+}
+
+function bookingAction(classId, action, btn) {
+    var origText = btn.textContent;
+    btn.disabled    = true;
+    btn.textContent = action === 'book' ? 'BOOKING...' : 'CANCELLING...';
+
+    var fd = new FormData();
+    fd.append('action',   action);
+    fd.append('class_id', classId);
+
+    fetch(SITE_ROOT + 'handlers/booking.php', { method: 'POST', body: fd })
+        .then(function(r) {
+            if (!r.ok) throw new Error('Server error ' + r.status + ' — check XAMPP is running');
+            return r.json();
+        })
+        .then(function(data) {
             showToast((data.status === 'success' ? '✅ ' : '⚠️ ') + data.message, data.status);
-            if (data.status === 'success') setTimeout(function() { location.reload(); }, 1200);
-            else { this.textContent = 'BOOK CLASS'; this.disabled = false; }
-        } catch(e) {
-            showToast('❌ Error. Check XAMPP.', 'error');
-            this.textContent = 'BOOK CLASS'; this.disabled = false;
-        }
+            if (data.status === 'success') {
+                setTimeout(function() { location.reload(); }, 1200);
+            } else {
+                btn.disabled    = false;
+                btn.textContent = origText;
+            }
+        })
+        .catch(function(err) {
+            showToast('❌ ' + err.message, 'error');
+            btn.disabled    = false;
+            btn.textContent = origText;
+        });
+}
+
+// Bind all book/cancel buttons
+document.querySelectorAll('.book-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        bookingAction(this.dataset.id, 'book', this);
     });
 });
 
 document.querySelectorAll('.cancel-btn').forEach(function(btn) {
-    btn.addEventListener('click', async function() {
-        var classId = this.dataset.id;
-        this.textContent = 'CANCELLING...'; this.disabled = true;
-        try {
-            var fd = new FormData();
-            fd.append('action', 'cancel'); fd.append('class_id', classId);
-            var res  = await fetch(getSiteRoot() + 'handlers/booking.php', { method: 'POST', body: fd });
-            var data = JSON.parse(await res.text());
-            showToast((data.status === 'success' ? '✅ ' : '⚠️ ') + data.message, data.status);
-            if (data.status === 'success') setTimeout(function() { location.reload(); }, 1200);
-            else { this.textContent = 'CANCEL'; this.disabled = false; }
-        } catch(e) {
-            showToast('❌ Error.', 'error');
-            this.textContent = 'CANCEL'; this.disabled = false;
-        }
+    btn.addEventListener('click', function() {
+        bookingAction(this.dataset.id, 'cancel', this);
     });
 });

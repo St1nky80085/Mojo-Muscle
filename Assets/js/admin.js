@@ -47,16 +47,16 @@ async function saveAdminForm(formEl, btnLabel) {
     btn.textContent = '💾 SAVING...'; btn.disabled = true;
     try {
         var fd = new FormData(formEl);
-        var res = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method: 'POST', body: fd });
+        var res = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method: 'POST', body: fd });
         var text = await res.text();
         var data;
         try { data = JSON.parse(text); }
-        catch(e) { console.error('PHP output:\n' + text); showToast('❌ Server error — see Console.', 'error'); btn.textContent = origText; btn.disabled = false; return; }
+        catch(e) { console.error('PHP output:\n' + text); showToast('Server error — see Console.', 'error'); btn.textContent = origText; btn.disabled = false; return; }
         if (data.status === 'success') {
-            showToast('✅ ' + data.message, 'success');
+            showToast(data.message, 'success');
             setTimeout(function() { location.reload(); }, 1200);
-        } else { showToast('⚠️ ' + data.message, 'error'); }
-    } catch(err) { showToast('❌ Save failed. Check XAMPP.', 'error'); }
+        } else { showToast(data.message, 'error'); }
+    } catch(err) { showToast('Save failed. Check XAMPP.', 'error'); }
     btn.textContent = origText; btn.disabled = false;
 }
 
@@ -88,13 +88,13 @@ async function toggleClassStatus(classId, btn) {
         fd.append('action', 'toggle_class_status');
         fd.append('class_id', classId);
         fd.append('new_status', newStatus);
-        var res  = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method: 'POST', body: fd });
+        var res  = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method: 'POST', body: fd });
         var data = JSON.parse(await res.text());
         if (data.status === 'success') {
             btn.textContent = newStatus === 'closed' ? '🔴' : '🟢';
-            showToast('✅ Class is now ' + newStatus.toUpperCase(), 'success');
-        } else { showToast('⚠️ ' + data.message, 'error'); }
-    } catch(e) { showToast('❌ Error. Check XAMPP.', 'error'); }
+            showToast('Class is now ' + newStatus.toUpperCase(), 'success');
+        } else { showToast(data.message, 'error'); }
+    } catch(e) { showToast('Error. Check XAMPP.', 'error'); }
 }
 
 // --- ADD CLASS ---
@@ -106,8 +106,8 @@ async function addClass() {
     var end        = document.getElementById('new-end').value;
     var slots      = document.getElementById('new-slots').value;
 
-    if (!name || !instructor || !start || !end) { showToast('⚠️ Fill in all fields.', 'error'); return; }
-    if (start >= end) { showToast('⚠️ End time must be after start time.', 'error'); return; }
+    if (!name || !instructor || !start || !end) { showToast('Fill in all fields.', 'error'); return; }
+    if (start >= end) { showToast('End time must be after start time.', 'error'); return; }
 
     try {
         var fd = new FormData();
@@ -118,10 +118,10 @@ async function addClass() {
         fd.append('start_time', start);
         fd.append('end_time', end);
         fd.append('max_slots', slots);
-        var res  = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method: 'POST', body: fd });
+        var res  = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method: 'POST', body: fd });
         var data = JSON.parse(await res.text());
         if (data.status === 'success') {
-            showToast('✅ Class added!', 'success');
+            showToast('Class added!', 'success');
             var list = document.getElementById('schedule-list');
             var row  = document.createElement('div');
             row.className = 'schedule-item';
@@ -141,7 +141,7 @@ async function addClass() {
             document.getElementById('new-end').value   = '';
             document.getElementById('new-slots').value = '20';
             toggleAddForm();
-        } else { showToast('⚠️ ' + data.message, 'error'); }
+        } else { showToast(data.message, 'error'); }
     } catch(e) { console.error(e); showToast('❌ Error adding class.', 'error'); }
 }
 
@@ -152,13 +152,13 @@ async function deleteClass(classId) {
         var fd = new FormData();
         fd.append('action', 'delete_class');
         fd.append('class_id', classId);
-        var res  = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method: 'POST', body: fd });
+        var res  = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method: 'POST', body: fd });
         var data = JSON.parse(await res.text());
         if (data.status === 'success') {
-            showToast('🗑️ Class deleted.', 'success');
+            showToast('Class deleted.', 'success');
             var row = document.getElementById('class-row-' + classId);
             if (row) { row.style.opacity = '0'; row.style.transition = 'opacity 0.3s'; setTimeout(function() { row.remove(); }, 300); }
-        } else { showToast('⚠️ ' + data.message, 'error'); }
+        } else { showToast(data.message, 'error'); }
     } catch(e) { showToast('❌ Error.', 'error'); }
 }
 
@@ -227,15 +227,15 @@ function applyFilters(query, filter) {
 async function deleteUser(userId, username, btn) {
     if (!confirm('Delete account "' + username + '"?\nThis will also remove their membership and bookings.')) return;
 
-    btn.disabled = true; btn.textContent = '⏳';
+    btn.disabled = true; btn.textContent = '...';
     try {
         var fd = new FormData();
         fd.append('action', 'delete_user');
         fd.append('user_id', userId);
-        var res  = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method: 'POST', body: fd });
+        var res  = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method: 'POST', body: fd });
         var data = JSON.parse(await res.text());
         if (data.status === 'success') {
-            showToast('🗑️ Account "' + username + '" deleted.', 'success');
+            showToast('Account deleted: ' + username + '" deleted.', 'success');
             var row = btn.closest('.acc-row');
             if (row) {
                 row.style.opacity = '0';
@@ -243,11 +243,11 @@ async function deleteUser(userId, username, btn) {
                 setTimeout(function() { row.remove(); }, 300);
             }
         } else {
-            showToast('⚠️ ' + data.message, 'error');
+            showToast(data.message, 'error');
             btn.disabled = false; btn.textContent = '🗑️';
         }
     } catch(e) {
-        showToast('❌ Error. Check XAMPP.', 'error');
+        showToast('Error. Check XAMPP.', 'error');
         btn.disabled = false; btn.textContent = '🗑️';
     }
 }
@@ -282,7 +282,7 @@ async function saveMembership() {
     var status  = document.getElementById('mem-editor-status').value;
     var endDate = document.getElementById('mem-editor-enddate').value;
 
-    if (!endDate) { showToast('⚠️ Please set an end date.', 'error'); return; }
+    if (!endDate) { showToast('Please set an end date.', 'error'); return; }
 
     var btn = document.querySelector('#membership-editor-modal .admin-save-btn');
     btn.textContent = '💾 SAVING...'; btn.disabled = true;
@@ -295,15 +295,15 @@ async function saveMembership() {
         fd.append('status',   status);
         fd.append('end_date', endDate);
 
-        var res  = await fetch(getSiteRoot() + 'handlers/admin_update.php', { method:'POST', body:fd });
+        var res  = await fetch(SITE_ROOT + 'handlers/admin_update.php', { method:'POST', body:fd });
         var data = JSON.parse(await res.text());
 
         if (data.status === 'success') {
-            showToast('✅ ' + data.message, 'success');
+            showToast(data.message, 'success');
             document.getElementById('membership-editor-modal').classList.remove('show');
             setTimeout(function() { location.reload(); }, 1000);
         } else {
-            showToast('⚠️ ' + data.message, 'error');
+            showToast(data.message, 'error');
         }
     } catch(e) {
         showToast('❌ Error saving membership.', 'error');

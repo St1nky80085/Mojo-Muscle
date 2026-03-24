@@ -29,18 +29,24 @@ $plan       = $user['plan']   ?? 'Free';
 $status     = $user['status'] ?? '';
 $mem_active = $status === 'active';
 $pd_map     = [
-    'Free'=>['FREE','#aaa','🆓'], 'Monthly'=>['FREE','#aaa','🆓'],
-    'Premium'=>['PREMIUM','#92ff77','⭐'], 'Quarterly'=>['PREMIUM','#92ff77','⭐'],
-    'VIP'=>['VIP','#ffd700','👑'], 'Annual'=>['VIP','#ffd700','👑'],
+    'Free'=>['FREE','#aaa',''], 'Monthly'=>['FREE','#aaa',''],
+    'Premium'=>['PREMIUM','#92ff77',''], 'Quarterly'=>['PREMIUM','#92ff77',''],
+    'VIP'=>['VIP','#ffd700',''], 'Annual'=>['VIP','#ffd700',''],
 ];
-[$label, $color, $icon] = $pd_map[$plan] ?? ['FREE','#aaa','🆓'];
+[$label, $color, $icon] = $pd_map[$plan] ?? ['FREE','#aaa',''];
 $can_book = $mem_active && $label !== 'FREE';
 
 $days_left = $pct = 0;
+$is_free_plan = ($user['plan'] ?? '') === 'Free';
 if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
-    $days_left  = max(0, (int)((strtotime($user['end_date']) - time()) / 86400));
-    $total_days = (strtotime($user['end_date']) - strtotime($user['start_date'])) / 86400;
-    $pct = $total_days > 0 ? max(0, min(100, round(($days_left / $total_days) * 100))) : 0;
+    if ($is_free_plan) {
+        $days_left = -1; // lifetime
+        $pct = 100;
+    } else {
+        $days_left  = max(0, (int)((strtotime($user['end_date']) - time()) / 86400));
+        $total_days = (strtotime($user['end_date']) - strtotime($user['start_date'])) / 86400;
+        $pct = $total_days > 0 ? max(0, min(100, round(($days_left / $total_days) * 100))) : 0;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -64,12 +70,12 @@ if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
     <div class="dash-section">
 
         <div class="dash-card profile-card">
-            <div class="profile-avatar">🧠</div>
+            <div class="profile-avatar"><?php echo strtoupper(substr($user['username'],0,1)); ?></div>
             <div class="profile-info">
                 <h2 class="profile-name"><?php echo htmlspecialchars($user['username']); ?></h2>
                 <p class="profile-email"><?php echo htmlspecialchars($user['email']); ?></p>
                 <p class="profile-joined">Minion since <?php echo date('F j, Y', strtotime($user['created_at'])); ?></p>
-                <a href="profile.php" class="dash-settings-link">⚙️ Account Settings</a>
+                <a href="profile.php" class="dash-settings-link">Account Settings</a>
             </div>
         </div>
 
@@ -77,14 +83,14 @@ if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
             <p class="card-title">Membership Status</p>
             <?php if ($mem_active): ?>
             <div class="mem-badge" style="border-color:<?php echo $color; ?>; color:<?php echo $color; ?>;">
-                <?php echo $icon.' '.$label; ?> — ACTIVE
+                <?php echo $label; ?> — ACTIVE
             </div>
             <?php if ($label !== 'FREE'): ?>
-            <div class="mem-detail"><span>📅 Started</span><span><?php echo date('M j, Y', strtotime($user['start_date'])); ?></span></div>
-            <div class="mem-detail"><span>⏳ Expires</span><span><?php echo date('M j, Y', strtotime($user['end_date'])); ?></span></div>
+            <div class="mem-detail"><span>Started</span><span><?php echo date('M j, Y', strtotime($user['start_date'])); ?></span></div>
+            <div class="mem-detail"><span>Expires</span><span><?php echo $is_free_plan ? '♾️ Lifetime' : date('M j, Y', strtotime($user['end_date'])); ?></span></div>
             <div class="mem-detail">
-                <span>🗓️ Days Left</span>
-                <span style="color:<?php echo $days_left < 7 ? '#ff6b6b' : '#92ff77'; ?>"><?php echo $days_left; ?> days</span>
+                <span>Days Left</span>
+                <span style="color:#92ff77"><?php echo $is_free_plan ? '∞ Lifetime' : $days_left.' days'; ?></span>
             </div>
             <?php if ($pct > 0): ?>
             <div class="mem-bar-wrap">
@@ -96,22 +102,22 @@ if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
             <p style="color:#888; font-size:0.82rem; margin-top:12px;">You're on the free plan. Upgrade to unlock class booking, priority slots & more.</p>
             <?php endif; ?>
             <a href="plans.php" class="upgrade-link" style="color:<?php echo $label==='FREE'?'#92ff77':($label==='PREMIUM'?'#ffd700':'#cfb2ff'); ?>">
-                <?php echo $label==='FREE'?'⬆️ Upgrade Plan':($label==='PREMIUM'?'👑 Go VIP':'✅ You\'re on the best plan!'); ?>
+                <?php echo $label==='FREE'?'Upgrade Plan':($label==='PREMIUM'?'Go VIP':'Best plan — maxed out.'); ?>
             </a>
             <?php else: ?>
             <div class="mem-badge" style="border-color:#ff6b6b; color:#ff6b6b;">❌ NO MEMBERSHIP</div>
-            <a href="plans.php" class="upgrade-link" style="color:#92ff77;">⬆️ View Plans</a>
+            <a href="plans.php" class="upgrade-link" style="color:#92ff77;">View Plans</a>
             <?php endif; ?>
         </div>
 
     </div>
 
     <div class="dash-card full-width">
-        <p class="card-title">🏋️ Class Schedule & Booking</p>
+        <p class="card-title">Class Schedule & Booking</p>
         <?php if (!$can_book): ?>
         <div class="upgrade-notice">
             <?php if ($label === 'FREE'): ?>
-            🔒 Class booking requires a <strong>Premium</strong> or <strong>VIP</strong> membership.
+            Class booking requires a <strong>Premium</strong> or <strong>VIP</strong> membership.
             <a href="plans.php" style="color:#92ff77; margin-left:8px;">Upgrade now →</a>
             <?php else: ?>
             Your membership is inactive. <a href="plans.php" style="color:#92ff77;">View plans →</a>
@@ -129,17 +135,15 @@ if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
             ?>
             <div class="class-card <?php echo $cls_class; ?>">
                 <div class="class-day"><?php echo $cls['schedule_day']; ?></div>
-                <span class="class-status-badge <?php echo $is_closed ? 'closed' : 'open'; ?>">
-                    <?php echo $is_closed ? '🔴 CLOSED' : '🟢 OPEN'; ?>
-                </span>
+                <span class="class-status-badge <?php echo $is_closed ? 'closed' : 'open'; ?>"><?php echo $is_closed ? 'CLOSED' : 'OPEN'; ?></span>
                 <div class="class-name"><?php echo htmlspecialchars($cls['class_name']); ?></div>
-                <div class="class-meta">🕐 <?php echo $time_str; ?></div>
-                <div class="class-meta">👤 <?php echo htmlspecialchars($cls['instructor']); ?></div>
+                <div class="class-meta"><?php echo $time_str; ?></div>
+                <div class="class-meta">Instructor: <?php echo htmlspecialchars($cls['instructor']); ?></div>
                 <?php if (!$is_closed): ?>
                 <div class="class-slots <?php echo $slots_left <= 3 ? 'low' : ''; ?>">
-                    <?php if ($is_booked): ?>✅ Booked
-                    <?php elseif ($is_full): ?>🔴 Full
-                    <?php else: ?>🟢 <?php echo $slots_left; ?>/<?php echo $cls['max_slots']; ?> slots
+                    <?php if ($is_booked): ?>Booked
+                    <?php elseif ($is_full): ?>Full
+                    <?php else: ?><?php echo $slots_left; ?>/<?php echo $cls['max_slots']; ?> slots
                     <?php endif; ?>
                 </div>
                 <?php if ($can_book): ?>
@@ -151,7 +155,7 @@ if ($mem_active && !empty($user['end_date']) && !empty($user['start_date'])) {
                         <button class="class-btn" disabled>FULL</button>
                     <?php endif; ?>
                 <?php else: ?>
-                    <button class="class-btn" disabled style="opacity:0.35;">🔒 MEMBERS ONLY</button>
+                    <button class="class-btn" disabled style="opacity:0.35;">MEMBERS ONLY</button>
                 <?php endif; ?>
                 <?php else: ?>
                 <button class="class-btn" disabled style="background:#2a0000; color:#ff6b6b; border:1px solid #4a0000;">UNAVAILABLE</button>

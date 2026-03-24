@@ -1,229 +1,109 @@
-/* contact.css */
+/* contact.css — uiverse glassmorphism */
 
-/* ── HERO ── */
-.contact-hero {
-    text-align: center;
-    padding: 64px 20px 40px;
-}
-.contact-hero .eyebrow {
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 5px;
-    color: #6a0dad;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-}
-.contact-hero h1 {
-    font-family: 'Courier New', monospace;
-    font-size: clamp(2rem, 7vw, 4rem);
-    font-weight: 900;
-    color: #e0e0e0;
-    letter-spacing: 2px;
-    margin: 0 0 12px;
-}
-.contact-hero h1 span { color: #92ff77; }
-.contact-hero .sub {
-    color: #777;
-    font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
-}
+.contact-hero { text-align:center; padding:70px 20px 44px; }
+.contact-hero .eyebrow { font-family:'Courier New',monospace; font-size:0.62rem; letter-spacing:6px; color:#4a148c; text-transform:uppercase; margin-bottom:16px; }
+.contact-hero h1 { font-family:'Courier New',monospace; font-size:clamp(2.2rem,7vw,4.2rem); font-weight:900; color:#e0e0e0; letter-spacing:3px; margin:0 0 14px; }
+.contact-hero h1 span { color:#92ff77; text-shadow:0 0 24px rgba(146,255,119,0.3); }
+.contact-hero .sub { color:#aaa; font-family:'Courier New',monospace; font-size:0.83rem; letter-spacing:0.5px; }
 
-/* ── LAYOUT ── */
-.contact-wrap {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 28px;
-    max-width: 1060px;
-    margin: 0 auto 60px;
-    padding: 0 24px;
-}
-@media (max-width: 780px) { .contact-wrap { grid-template-columns: 1fr; } }
+.contact-wrap { display:grid; grid-template-columns:300px 1fr; gap:20px; max-width:1040px; margin:0 auto 70px; padding:0 24px; }
+@media (max-width:780px) { .contact-wrap { grid-template-columns:1fr; } }
 
-/* ── INFO CARDS ── */
-.info-col { display: flex; flex-direction: column; gap: 12px; }
-
+.info-col { display:flex; flex-direction:column; gap:10px; }
 .info-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    background: rgba(0,0,0,0.25);
-    border: 1px solid #2a0a5e;
-    border-left: 3px solid #4a148c;
-    border-radius: 8px;
-    padding: 16px 18px;
-    transition: border-left-color 0.25s, transform 0.25s;
-    
+    background:rgba(255,255,255,0.02);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(151,95,255,0.1);
+    border-radius:12px; padding:16px 18px;
+    position:relative; overflow:hidden;
+    transition:border-color 0.2s, box-shadow 0.2s;
+    box-shadow:0 4px 16px rgba(0,0,0,0.25);
 }
-
-
-.info-card:hover { border-left-color: #9757ff; transform: translateX(3px); }
-.info-card > span { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
-.info-card h4 {
-    font-family: 'Courier New', monospace;
-    font-size: 0.72rem;
-    font-weight: bold;
-    color: #92ff77;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin: 0 0 3px;
+.info-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(151,95,255,0.2),transparent);
 }
-.info-card p {
-    font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
-    color: #999;
-    margin: 0;
-    line-height: 1.6;
-}
+.info-card:hover { border-color:rgba(151,95,255,0.25); box-shadow:0 8px 24px rgba(0,0,0,0.35); }
+.info-card h4 { font-family:'Courier New',monospace; font-size:0.6rem; font-weight:900; color:#9757ff; letter-spacing:2px; text-transform:uppercase; margin:0 0 7px; }
+.info-card p  { font-family:'Courier New',monospace; font-size:0.8rem; color:#bbb; margin:0; line-height:1.65; }
 
-/* ── SOCIAL BOX ── */
 .social-box {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid #2a0a5e;
-    border-radius: 8px;
-    padding: 18px;
+    background:rgba(255,255,255,0.02); backdrop-filter:blur(10px);
+    border:1px solid rgba(151,95,255,0.1);
+    border-radius:12px; padding:18px;
+    box-shadow:0 4px 16px rgba(0,0,0,0.25);
 }
-.social-box h4 {
-    font-family: 'Courier New', monospace;
-    font-size: 0.72rem;
-    color: #92ff77;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0 0 12px;
-}
-.social-links { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 16px; /* Spacing between the icons */
-}
+.social-box h4 { font-family:'Courier New',monospace; font-size:0.6rem; color:#9757ff; text-transform:uppercase; letter-spacing:2px; font-weight:900; margin:0 0 12px; }
+.social-links { display:flex; flex-wrap:wrap; gap:8px; }
 .social-links a {
-    background: transparent; /* Removes the dark box */
-    border: none; /* Removes the border */
-    padding: 0; 
-    display: inline-block;
-    transition: transform 0.2s;
+    background:transparent; border:1px solid rgba(151,95,255,0.15);
+    color:#aaa; padding:5px 14px; border-radius:30px;
+    font-size:0.7rem; font-family:'Courier New',monospace;
+    text-decoration:none; letter-spacing:0.5px; transition:all 0.2s;
 }
-.social-links img {
-    width: 36px; /* Adjust this to make logos bigger/smaller */
-    height: 36px;
-    object-fit: contain;
-}
-.social-links a:hover { 
-    background: transparent; 
-    transform: scale(1.15); /* Keeps the cool hover pop effect */
-}
+.social-links a:hover { background:rgba(151,95,255,0.1); border-color:rgba(151,95,255,0.4); color:#cfb2ff; box-shadow:0 0 10px rgba(151,95,255,0.2); }
 
-/* ── FORM CARD ── */
 .form-card {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid #2a0a5e;
-    border-radius: 10px;
-    padding: 32px 28px;
+    background:rgba(255,255,255,0.02); backdrop-filter:blur(12px);
+    border:1px solid rgba(151,95,255,0.12);
+    border-radius:16px; padding:36px 32px;
+    position:relative; overflow:hidden;
+    transition:border-color 0.3s;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.form-card h3 {
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
-    font-weight: 900;
-    color: #e0e0e0;
-    margin: 0 0 4px;
+.form-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(151,95,255,0.35),transparent);
 }
-.form-card > p {
-    font-family: 'Courier New', monospace;
-    font-size: 0.76rem;
-    color: #555;
-    margin: 0 0 22px;
-}
+.form-card:hover { border-color:rgba(151,95,255,0.25); }
+.form-card h3 { font-family:'Courier New',monospace; font-size:1rem; font-weight:900; color:#e0e0e0; letter-spacing:1px; margin:0 0 4px; }
+.form-card > p { font-family:'Courier New',monospace; font-size:0.72rem; color:#888; margin:0 0 26px; }
 
-.row-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+.row-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:500px) { .row-2 { grid-template-columns:1fr; } }
+.field { display:flex; flex-direction:column; margin-bottom:16px; }
+.field label { font-family:'Courier New',monospace; font-size:0.62rem; color:#aaa; margin-bottom:6px; letter-spacing:1.5px; text-transform:uppercase; }
+.field input,.field select,.field textarea {
+    background:rgba(255,255,255,0.03); color:#e0e0e0;
+    border:none; border-bottom:1px solid rgba(151,95,255,0.2);
+    padding:0.65rem 0.5rem; border-radius:6px 6px 0 0;
+    font-family:'Courier New',monospace; font-size:0.82rem;
+    box-sizing:border-box; width:100%;
+    transition:all 0.25s;
 }
-@media (max-width: 500px) { .row-2 { grid-template-columns: 1fr; } }
-
-.field { display: flex; flex-direction: column; margin-bottom: 14px; }
-.field label {
-    font-family: 'Courier New', monospace;
-    font-size: 0.74rem;
-    color: #cfb2ff;
-    margin-bottom: 5px;
+.field input:focus,.field select:focus,.field textarea:focus {
+    outline:none; border-bottom-color:#9757ff;
+    background:rgba(151,95,255,0.05);
+    box-shadow:0 4px 12px rgba(151,95,255,0.1);
 }
-.field input,
-.field select,
-.field textarea {
-    background: rgba(0,0,0,0.3);
-    color: #e0e0e0;
-    border: none;
-    border-bottom: 2px solid #3a0a7e;
-    padding: 0.6rem 0.5rem;
-    border-radius: 4px 4px 0 0;
-    font-family: 'Courier New', monospace;
-    font-size: 0.83rem;
-    box-sizing: border-box;
-    width: 100%;
-    transition: border-bottom-color 0.25s, background 0.25s;
-}
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-    outline: none;
-    border-bottom-color: #92ff77;
-    background: rgba(146,255,119,0.03);
-}
-.field input::placeholder,
-.field textarea::placeholder { color: #3a3a3a; }
-.field select { cursor: pointer; }
-.field select option { background: #1a1a2e; }
-.field textarea { height: 120px; resize: vertical; }
+.field input::placeholder,.field textarea::placeholder { color:#1e1e1e; }
+.field select { cursor:pointer; }
+.field select option { background:#0d0d0d; }
+.field textarea { height:130px; resize:vertical; }
 
 #send-btn {
-    width: 100%;
-    padding: 12px;
-    background: #9757ff;
-    color: #fff;
-    border: none;
-    border-radius: 40px;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 0.86rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.25s;
-    margin-top: 4px;
+    width:100%; padding:12px;
+    background:transparent; color:#cfb2ff;
+    border:1px solid rgba(151,95,255,0.35);
+    border-radius:40px; font-family:'Courier New',monospace;
+    font-weight:bold; font-size:0.8rem;
+    letter-spacing:2px; cursor:pointer;
+    transition:all 0.3s; margin-top:6px;
 }
 #send-btn:hover:not(:disabled) {
-    box-shadow: 0 0 18px rgba(151,95,255,0.5);
-    transform: scale(1.02);
+    background:rgba(151,95,255,0.15); border-color:#9757ff;
+    box-shadow:0 0 24px rgba(151,95,255,0.3); color:#fff;
+    transform:translateY(-1px);
 }
-#send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+#send-btn:disabled { opacity:0.4; cursor:not-allowed; }
 
 #success-msg {
-    display: none;
-    background: rgba(146,255,119,0.07);
-    border: 1px solid #92ff77;
-    border-radius: 8px;
-    padding: 28px;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
-    color: #92ff77;
-    line-height: 1.65;
-}
-
-.info-card img {
-    width: 35px !important;
-    height: 35px !important;
-    max-width: 35px !important;
-    max-height: 35px !important;
-    object-fit: contain !important;
-    flex-shrink: 0 !important;
-    display: block !important;
-}
-
-.social-links img {
-    width: 38px !important;
-    height: 38px !important;
-    max-width: 38px !important;
-    max-height: 38px !important;
-    object-fit: contain !important;
-    display: block !important;
+    display:none; background:rgba(146,255,119,0.04);
+    border:1px solid rgba(146,255,119,0.15);
+    border-left:2px solid #92ff77;
+    border-radius:10px; padding:30px;
+    text-align:center; font-family:'Courier New',monospace;
+    font-size:0.84rem; color:#92ff77; line-height:1.75;
 }

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/contact.css">
-    <link rel="stylesheet" href="assets/css/inup.css">
 </head>
 <body>
     <?php include 'bg.php'; ?>
@@ -26,27 +25,28 @@
 
         <div class="info-col">
             <div class="info-card">
-                <span><img src="assets/image/location.gif" alt="location"></span>
+                
                 <div>
                     <h4>Location</h4>
                     <p>123 Townsville St.,<br>Mojo's Fortress, PH</p>
                 </div>
             </div>
             <div class="info-card">
-                <span><img src="assets/image/phone.gif" alt="phone"></span>
+                
                 <div>
                     <h4>Phone</h4>
                     <p>+63 912 345 6789</p>
                 </div>
             </div>
             <div class="info-card">
-                <span><img src="assets/image/email.png" alt="email"></span>
+                
                 <div>
                     <h4>Email</h4>
                     <p>mojo@themojomuscle.com</p>
                 </div>
             </div>
             <div class="info-card">
+                
                 <div>
                     <h4>Support Hours</h4>
                     <p>Mon–Fri: 8 AM – 8 PM<br>Sat–Sun: 10 AM – 5 PM</p>
@@ -55,10 +55,10 @@
             <div class="social-box">
                 <h4>Follow The Lair</h4>
                 <div class="social-links">
-                    <a href=""> <img src="assets/image/fb.png" alt="Facebook"> </a>
-                    <a href=""> <img src="assets/image/insta.png" alt="Instagram"></a>
-                    <a href=""> <img src="assets/image/twitter.png" alt="Twitter"></a>
-                    <a href=""> <img src="assets/image/youtube.png" alt="YouTube"></a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
                     <label>Message</label>
                     <textarea placeholder="Tell us what's on your mind..." required></textarea>
                 </div>
-                <button type="submit" id="send-btn">📡 TRANSMIT MESSAGE</button>
+                <button type="submit" id="send-btn">SEND MESSAGE</button>
             </form>
 
             <div id="success-msg">
@@ -104,12 +104,7 @@
 
     </div>
 
-     <?php include 'Signin.php'; ?>
-    <div id="mojo-toast" class="mojo-toast"></div>
-    <script>
-    const SITE_ROOT = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['SCRIPT_NAME']),'/\\').'/'; ?>";
-    </script>
-    <script src="assets/js/signin.js"></script>
+    <?php include 'footer.php'; ?>
     <script>
     document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();

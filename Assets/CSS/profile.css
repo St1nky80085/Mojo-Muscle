@@ -1,173 +1,145 @@
-/* profile.css */
+/* profile.css — uiverse glassmorphism */
 
-.profile-wrapper {
-    max-width: 980px;
-    margin: 30px auto 60px;
-    padding: 0 20px;
-}
+.profile-wrapper { max-width: 980px; margin: 28px auto 70px; padding: 0 20px; }
 
 /* ── HEADER ── */
 .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    margin-bottom: 32px;
-    padding: 26px 28px;
-    background: rgba(0,0,0,0.28);
-    border: 1px solid #2a0a5e;
-    border-bottom: 3px solid #4a148c;
-    border-radius: 8px;
-    flex-wrap: wrap;
+    display: flex; align-items: center; gap: 22px;
+    margin-bottom: 24px; padding: 28px 30px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(151,95,255,0.15);
+    border-radius: 16px; flex-wrap: wrap;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.profile-big-avatar { font-size: 3.8rem; }
-.profile-header h1 {
-    font-family: 'Courier New', monospace;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: #92ff77;
-    margin: 0 0 4px;
+.profile-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(151,95,255,0.4), transparent);
 }
-.profile-header .email  { font-family: 'Courier New', monospace; font-size: 0.82rem; color: #cfb2ff; margin: 0 0 3px; }
-.profile-header .joined { font-family: 'Courier New', monospace; font-size: 0.74rem; color: #555; margin: 0 0 10px; }
-
+.profile-big-avatar {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a0a5e, #6a1fa8);
+    border: 1px solid rgba(151,95,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.9rem; font-weight: 900; color: #cfb2ff;
+    font-family: 'Courier New', monospace; flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(151,95,255,0.2);
+}
+.profile-header h1 { font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: 900; color: #fff; margin: 0 0 4px; }
+.profile-header .email  { font-family: 'Courier New', monospace; font-size: 0.78rem; color: #ccc; margin: 0 0 3px; }
+.profile-header .joined { font-family: 'Courier New', monospace; font-size: 0.7rem; color: #aaa; margin: 0 0 10px; }
 .mem-pill {
-    display: inline-block;
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 3px 13px;
-    border-radius: 30px;
-    letter-spacing: 1px;
+    display: inline-block; font-family: 'Courier New', monospace;
+    font-size: 0.65rem; font-weight: bold;
+    padding: 3px 12px; border-radius: 30px; letter-spacing: 2px;
 }
-.mem-pill.active  { background: rgba(146,255,119,0.1); color: #92ff77; border: 1px solid rgba(146,255,119,0.35); }
-.mem-pill.expired { background: rgba(255,77,77,0.1);   color: #ff6b6b; border: 1px solid rgba(255,77,77,0.35); }
+.mem-pill.active  { background: rgba(146,255,119,0.08); color: #92ff77; border: 1px solid rgba(146,255,119,0.25); }
+.mem-pill.expired { background: rgba(255,77,77,0.08);   color: #ff6b6b; border: 1px solid rgba(255,77,77,0.25); }
 
 /* ── SETTINGS GRID ── */
-.settings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-}
+.settings-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; }
 
 .settings-card {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid #2a0a5e;
-    border-bottom: 3px solid #4a148c;
-    border-radius: 8px;
-    padding: 24px 22px;
-    transition: border-bottom-color 0.25s;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(151,95,255,0.1);
+    border-radius: 14px; padding: 24px 22px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03);
 }
-.settings-card:hover { border-bottom-color: #9757ff; }
-.danger-card { border-bottom-color: #4a0000 !important; }
-.danger-card:hover { border-bottom-color: #ff4d4d !important; }
+.settings-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(151,95,255,0.2), transparent);
+}
+.settings-card:hover { border-color: rgba(151,95,255,0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+.danger-card { border-color: rgba(255,77,77,0.1) !important; }
+.danger-card::before { background: linear-gradient(90deg, transparent, rgba(255,77,77,0.2), transparent) !important; }
+.danger-card:hover { border-color: rgba(255,77,77,0.25) !important; }
 
 .settings-card h3 {
-    font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
-    font-weight: bold;
-    color: #cfb2ff;
-    letter-spacing: 1px;
-    margin: 0 0 18px;
+    font-family: 'Courier New', monospace; font-size: 0.68rem;
+    font-weight: 900; color: #9757ff;
+    letter-spacing: 3px; margin: 0 0 18px;
     text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(151,95,255,0.1);
 }
 .settings-card label {
-    display: block;
-    font-family: 'Courier New', monospace;
-    font-size: 0.74rem;
-    color: #9757ff;
-    margin-bottom: 5px;
-    letter-spacing: 0.5px;
+    display: block; font-family: 'Courier New', monospace;
+    font-size: 0.65rem; color: #bbb;
+    margin-bottom: 5px; letter-spacing: 1px; text-transform: uppercase;
 }
-.settings-card small { color: #555; font-size: 0.68rem; }
-
+.settings-card small { color: #aaa; font-size: 0.65rem; }
 .settings-card input {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    background: rgba(0,0,0,0.3);
-    color: #e0e0e0;
-    border: none;
-    border-bottom: 2px solid #3a0a7e;
-    padding: 0.58rem 0.5rem;
-    border-radius: 4px 4px 0 0;
-    font-family: 'Courier New', monospace;
-    font-size: 0.84rem;
-    margin-bottom: 14px;
-    transition: border-bottom-color 0.25s, background 0.25s;
+    display: block; width: 100%; box-sizing: border-box;
+    background: rgba(255,255,255,0.03); color: #e0e0e0;
+    border: none; border-bottom: 1px solid rgba(151,95,255,0.2);
+    padding: 0.58rem 0.4rem; border-radius: 6px 6px 0 0;
+    font-family: 'Courier New', monospace; font-size: 0.82rem;
+    margin-bottom: 14px; transition: all 0.25s;
 }
 .settings-card input:focus {
-    outline: none;
-    border-bottom-color: #92ff77;
-    background: rgba(146,255,119,0.03);
+    outline: none; border-bottom-color: #9757ff;
+    background: rgba(151,95,255,0.05);
+    box-shadow: 0 4px 12px rgba(151,95,255,0.1);
 }
-.settings-card input::placeholder { color: #333; }
+.settings-card input::placeholder { color: #555; }
 
 .settings-card button {
-    width: 100%;
-    padding: 10px;
-    background: #9757ff;
+    width: 100%; padding: 10px;
+    background: rgba(151,95,255,0.1);
+    color: #cfb2ff;
+    border: 1px solid rgba(151,95,255,0.3);
+    border-radius: 40px; font-family: 'Courier New', monospace;
+    font-weight: bold; font-size: 0.78rem;
+    letter-spacing: 1px; cursor: pointer;
+    margin-top: 4px; transition: all 0.25s;
+}
+.settings-card button:hover {
+    background: rgba(151,95,255,0.2);
+    border-color: #9757ff;
+    box-shadow: 0 0 18px rgba(151,95,255,0.3);
     color: #fff;
-    border: none;
-    border-radius: 40px;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 0.82rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    margin-top: 4px;
-    transition: all 0.25s;
 }
-.settings-card button:hover { box-shadow: 0 0 14px rgba(151,95,255,0.4); transform: scale(1.02); }
-
 .danger-btn {
-    background: rgba(255,77,77,0.12) !important;
+    background: rgba(255,77,77,0.08) !important;
     color: #ff6b6b !important;
-    border: 1px solid #4a0000 !important;
+    border: 1px solid rgba(255,77,77,0.2) !important;
 }
-.danger-btn:hover { background: #ff4d4d !important; color: #fff !important; box-shadow: 0 0 14px rgba(255,77,77,0.35) !important; }
-
-.settings-card p {
-    font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
-    color: #666;
-    margin-bottom: 14px;
+.danger-btn:hover {
+    background: rgba(255,77,77,0.18) !important;
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 18px rgba(255,77,77,0.25) !important;
+    color: #fff !important;
 }
+.settings-card p { font-family: 'Courier New', monospace; font-size: 0.78rem; color: #ccc; margin-bottom: 14px; }
 
-/* ── MEMBERSHIP INFO ROWS ── */
 .info-row {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Courier New', monospace;
-    font-size: 0.82rem;
-    color: #ccc;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between;
+    font-family: 'Courier New', monospace; font-size: 0.8rem;
+    color: #ccc; padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-.info-row span:first-child { color: #666; }
+.info-row span:last-child { color: #ccc; }
 
 /* ── CONFIRM DELETE MODAL ── */
 .confirm-box {
-    background: #1e1e1e;
-    border: 1px solid #4a0000;
-    border-bottom: 3px solid #ff4d4d;
-    border-radius: 10px;
-    padding: 28px 26px;
-    width: 90%;
-    max-width: 360px;
+    background: rgba(18,8,28,0.96); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,77,77,0.2);
+    border-radius: 14px; padding: 28px 26px;
+    width: 90%; max-width: 360px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7);
 }
 .confirm-box input {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    background: rgba(0,0,0,0.4);
-    color: #e0e0e0;
-    border: none;
-    border-bottom: 2px solid #4a0000;
-    padding: 0.58rem 0.5rem;
-    border-radius: 4px 4px 0 0;
-    font-family: 'Courier New', monospace;
-    font-size: 0.84rem;
-    margin-top: 6px;
-    transition: border-bottom-color 0.25s;
+    display: block; width: 100%; box-sizing: border-box;
+    background: rgba(255,255,255,0.03); color: #e0e0e0;
+    border: none; border-bottom: 1px solid rgba(255,77,77,0.3);
+    padding: 0.58rem 0.4rem; border-radius: 6px 6px 0 0;
+    font-family: 'Courier New', monospace; font-size: 0.84rem;
+    margin-top: 6px; transition: all 0.25s;
 }
-.confirm-box input:focus { outline: none; border-bottom-color: #ff6b6b; }
+.confirm-box input:focus { outline: none; border-bottom-color: #ff6b6b; background: rgba(255,77,77,0.04); }
