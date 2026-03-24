@@ -49,7 +49,7 @@ $conn->close();
     <div class="settings-grid">
 
         <div class="settings-card">
-            <h3>✏️ Username</h3>
+            <h3>Username</h3>
             <form id="update-username-form">
                 <label>New Username</label>
                 <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required />
@@ -58,7 +58,7 @@ $conn->close();
         </div>
 
         <div class="settings-card">
-            <h3>📧 Email</h3>
+            <h3>Email</h3>
             <form id="update-email-form">
                 <label>New Email</label>
                 <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required />
@@ -69,7 +69,7 @@ $conn->close();
         </div>
 
         <div class="settings-card">
-            <h3>🔑 Password</h3>
+            <h3>Password</h3>
             <form id="reset-password-form">
                 <label>Current Password</label>
                 <input type="password" name="current_password" placeholder="••••••••" required />
@@ -82,9 +82,9 @@ $conn->close();
         </div>
 
         <div class="settings-card">
-            <h3>💳 Membership</h3>
+            <h3>Membership</h3>
             <?php if ($membership):
-                $days_left = max(0, (int)((strtotime($membership['end_date']) - time()) / 86400));
+                $days_left = ($membership['plan'] === 'Free') ? -1 : max(0, (int)((strtotime($membership['end_date']) - time()) / 86400));
             ?>
             <div class="info-row"><span>Plan</span><span><?php echo $membership['plan']; ?></span></div>
             <div class="info-row"><span>Status</span>
@@ -93,12 +93,12 @@ $conn->close();
                 </span>
             </div>
             <div class="info-row"><span>Started</span><span><?php echo date('M j, Y', strtotime($membership['start_date'])); ?></span></div>
-            <div class="info-row"><span>Expires</span><span><?php echo date('M j, Y', strtotime($membership['end_date'])); ?></span></div>
+            <div class="info-row"><span>Expires</span><span><?php echo $membership['plan']==='Free' ? 'Lifetime' : date('M j, Y', strtotime($membership['end_date'])); ?></span></div>
             <div class="info-row">
                 <span>Days Left</span>
-                <span style="color:<?php echo $days_left < 7 ? '#ff6b6b' : '#92ff77'; ?>"><?php echo $days_left; ?>d</span>
+                <span style="color:<?php echo $days_left === -1 ? '#92ff77' : ($days_left < 7 ? '#ff6b6b' : '#92ff77'); ?>"><?php echo $days_left === -1 ? '∞' : $days_left.'d'; ?></span>
             </div>
-            <a href="plans.php" class="upgrade-link" style="color:#92ff77; margin-top:14px; display:inline-block; font-size:0.8rem; font-family:'Courier New',monospace; text-decoration:none;">⬆️ Change Plan</a>
+            <a href="plans.php" class="upgrade-link" style="color:#92ff77; margin-top:14px; display:inline-block; font-size:0.8rem; font-family:'Courier New',monospace; text-decoration:none;">Change Plan</a>
             <?php else: ?>
             <p style="color:#666; font-size:0.83rem;">No active membership.</p>
             <a href="plans.php" style="color:#92ff77; font-size:0.8rem; font-family:'Courier New',monospace;">View Plans →</a>
@@ -106,7 +106,7 @@ $conn->close();
         </div>
 
         <div class="settings-card danger-card">
-            <h3 style="color:#ff6b6b;">⚠️ Danger Zone</h3>
+            <h3 style="color:#ff6b6b;">Danger Zone</h3>
             <p>Permanently delete your account. This cannot be undone.</p>
             <button id="delete-account-btn" class="danger-btn">DELETE MY ACCOUNT</button>
         </div>
@@ -118,7 +118,7 @@ $conn->close();
 
 <div id="confirm-delete-modal" class="modal-overlay">
     <div class="confirm-box">
-        <p style="color:#ff6b6b; font-family:'Courier New',monospace; font-weight:bold; font-size:1rem; margin-bottom:8px;">⚠️ ARE YOU SURE?</p>
+        <p style="color:#ff6b6b; font-family:'Courier New',monospace; font-weight:bold; font-size:1rem; margin-bottom:8px;">ARE YOU SURE?</p>
         <p style="color:#888; font-size:0.83rem; margin-bottom:18px;">This will permanently delete your account and all your data.</p>
         <label style="color:#cfb2ff; font-size:0.8rem; font-family:'Courier New',monospace;">Type your password to confirm</label>
         <input type="password" id="delete-confirm-pwd" placeholder="••••••••" />

@@ -1,194 +1,419 @@
-/* home.css — shared across Home, Dashboard */
+/* home.css — Home, Dashboard shared — uiverse design */
 
-/* ── ANNOUNCEMENT ── */
+/* Ensure modal stays hidden (also in style.css + inup.css) */
+.modal-overlay { display: none !important; }
+.modal-overlay.show { display: flex !important; opacity: 1; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANNOUNCEMENT BANNER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .announcement-banner {
-    background: linear-gradient(90deg, #4a148c, #2d1b69);
-    border-bottom: 2px solid #92ff77;
-    color: #92ff77;
-    padding: 11px 20px;
+    background: linear-gradient(90deg, rgba(74,20,140,0.6), rgba(106,31,168,0.4));
+    border-bottom: 1px solid rgba(151,95,255,0.3);
+    color: #cfb2ff;
+    padding: 10px 20px;
     text-align: center;
     font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     letter-spacing: 1px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    position: relative;
-    z-index: 100;
+    justify-content: center; align-items: center; gap: 16px;
+    backdrop-filter: blur(8px);
+    position: relative; z-index: 100;
 }
 .dismiss-btn {
     background: none;
-    border: 1px solid #92ff77;
-    color: #92ff77;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 22px; height: 22px;
-    font-size: 11px;
-    flex-shrink: 0;
+    border: 1px solid rgba(151,95,255,0.4);
+    color: #9757ff; cursor: pointer;
+    border-radius: 50%; width: 20px; height: 20px;
+    font-size: 10px; flex-shrink: 0;
     transition: all 0.2s;
 }
-.dismiss-btn:hover { background: #92ff77; color: #1a1a1a; }
+.dismiss-btn:hover { background: #9757ff; color: #fff; }
 
-/* ── HOME ACTION BUTTONS ── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HOME ACTION BUTTONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .home-actions {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
+    display: flex; justify-content: center;
+    gap: 14px; flex-wrap: wrap;
     margin: 0 0 50px;
 }
 .btn-outline-purple, .btn-outline-green {
-    padding: 11px 26px;
-    border-radius: 40px;
+    padding: 11px 28px; border-radius: 40px;
     font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 0.84rem;
-    letter-spacing: 1px;
-    text-decoration: none;
-    cursor: pointer;
-    background: transparent;
-    transition: all 0.25s;
-    display: inline-block;
+    font-weight: bold; font-size: 0.8rem;
+    letter-spacing: 2px; text-decoration: none;
+    cursor: pointer; background: transparent;
+    transition: all 0.3s; display: inline-block;
+    position: relative; overflow: hidden;
 }
-.btn-outline-purple { color: #cfb2ff; border: 2px solid #9757ff; }
-.btn-outline-purple:hover { background: #9757ff; color: #fff; box-shadow: 0 0 16px rgba(151,95,255,0.4); }
-.btn-outline-green  { color: #92ff77;  border: 2px solid #92ff77; }
-.btn-outline-green:hover  { background: #92ff77; color: #111; }
-
-/* ── HOME CARDS ── */
-.stat-number { font-size: 3rem !important; font-weight: 900 !important; color: #92ff77 !important; margin: 10px 0 5px !important; }
-.stat-label  { color: #888 !important; font-size: 0.85rem !important; }
-.card-menu li { display: flex; justify-content: space-between; }
-
-/* ── TODAY DATETIME ── */
-.today-datetime {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    padding: 6px 10px;
-    background: rgba(146,255,119,0.05);
-    border: 1px solid rgba(146,255,119,0.18);
-    border-radius: 5px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.7rem;
+.btn-outline-purple {
+    color: #cfb2ff;
+    border: 1px solid rgba(151,95,255,0.5);
+    box-shadow: 0 0 12px rgba(151,95,255,0.1), inset 0 0 12px rgba(151,95,255,0.05);
+}
+.btn-outline-purple:hover {
+    background: rgba(151,95,255,0.15);
+    border-color: #9757ff;
+    box-shadow: 0 0 24px rgba(151,95,255,0.35);
+    color: #fff;
+}
+.btn-outline-green {
     color: #92ff77;
+    border: 1px solid rgba(146,255,119,0.4);
+    box-shadow: 0 0 12px rgba(146,255,119,0.08), inset 0 0 12px rgba(146,255,119,0.04);
+}
+.btn-outline-green:hover {
+    background: rgba(146,255,119,0.1);
+    border-color: #92ff77;
+    box-shadow: 0 0 24px rgba(146,255,119,0.25);
+    color: #fff;
 }
 
-/* ── GYM HOURS ── */
-.hours-li { display: flex; justify-content: space-between; align-items: center; }
-.hours-day-label { display: flex; align-items: center; gap: 5px; font-size: 0.88rem; }
-.status-dot { font-size: 0.65rem; }
-.hours-value { font-size: 0.85rem; }
-.day-closed .hours-day-label { text-decoration: line-through; color: #555; }
-.closed-label { color: #ff6b6b; font-weight: bold; font-size: 0.78rem; text-decoration: none !important; }
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACTIVE MEMBERS STATS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.stat-number {
+    font-size: 4rem !important; font-weight: 900 !important;
+    color: #92ff77 !important; margin: auto 0 6px !important;
+    line-height: 1 !important;
+    text-shadow: 0 0 30px rgba(146,255,119,0.4) !important;
+}
+.stat-label { color: #aaa !important; font-size: 0.78rem !important; margin-bottom: auto !important; letter-spacing: 2px !important; }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GYM HOURS CARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.today-datetime {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px; margin-bottom: 12px;
+    padding: 7px 12px;
+    background: rgba(146,255,119,0.04);
+    border: 1px solid rgba(146,255,119,0.1);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem; color: #92ff77;
+    white-space: nowrap;
+}
+.hours-li { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hours-day-label { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; white-space: nowrap; }
+.status-dot  { font-size: 0.6rem; flex-shrink: 0; }
+.hours-value { font-size: 0.8rem; white-space: nowrap; text-align: right; flex-shrink: 0; color: #bbb; }
+.day-closed .hours-day-label { text-decoration: line-through; color: #777; }
 .hours-li.today-row {
-    background: rgba(146,255,119,0.07);
-    border: 1px solid rgba(146,255,119,0.25);
-    border-radius: 5px;
-    padding: 5px 8px;
-    margin: 2px 0;
+    background: rgba(146,255,119,0.06);
+    border: 1px solid rgba(146,255,119,0.12);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
 }
 .hours-li.today-row .hours-day-label,
 .hours-li.today-row .hours-value { color: #92ff77 !important; font-weight: bold; }
-.hours-li.today-row.day-closed { background: rgba(255,77,77,0.06); border-color: rgba(255,77,77,0.25); }
-.hours-li.today-row.day-closed .hours-day-label,
-.hours-li.today-row.day-closed .hours-value { color: #ff6b6b !important; }
-
-.hours-li.other-day { opacity: 0.38; padding: 3px 8px; }
-.hours-li.other-day:hover { opacity: 0.7; transition: opacity 0.2s; }
-
+.hours-li.other-day { opacity: 0.4; padding: 3px 8px; }
+.hours-li.other-day:hover { opacity: 0.75; transition: opacity 0.2s; }
 .today-indicator { color: #92ff77; font-size: 0.6rem; }
 .today-tag {
-    background: #92ff77; color: #111;
-    font-size: 0.56rem; font-weight: 900;
-    padding: 1px 6px; border-radius: 30px;
-    margin-left: 4px; letter-spacing: 1px;
+    font-size: 0.5rem; font-weight: 900;
+    background: rgba(146,255,119,0.15);
+    border: 1px solid rgba(146,255,119,0.3);
+    color: #92ff77; padding: 1px 6px;
+    border-radius: 4px; letter-spacing: 1px;
+}
+.closed-label { color: #ff4d4d; font-size: 0.72rem; letter-spacing: 1px; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   WORKOUT PLAN CARD — uiverse
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.wplan-card { text-align: left; gap: 10px; display: flex; flex-direction: column; }
+
+.wplan-locked {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; text-align: center; padding: 10px;
+}
+.wplan-lock-icon { font-size: 2.2rem; filter: grayscale(0.5); }
+.wplan-locked p {
     font-family: 'Courier New', monospace;
-    vertical-align: middle;
+    font-size: 0.78rem; color: #999;
+    line-height: 1.65; margin: 0;
+}
+.wplan-locked strong { color: #9757ff; }
+.wplan-upgrade-btn {
+    display: inline-block; padding: 8px 22px;
+    background: transparent;
+    border: 1px solid rgba(151,95,255,0.4);
+    border-radius: 30px; color: #9757ff;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem; font-weight: bold;
+    letter-spacing: 1px; text-decoration: none;
+    cursor: pointer; transition: all 0.25s;
+}
+.wplan-upgrade-btn:hover {
+    background: rgba(151,95,255,0.15);
+    box-shadow: 0 0 16px rgba(151,95,255,0.3);
+    color: #cfb2ff;
 }
 
-/* ── DASHBOARD ── */
-.dash-wrapper  { max-width: 1080px; margin: 30px auto 60px; padding: 0 20px; display: flex; flex-direction: column; gap: 22px; }
-.dash-section  { display: flex; gap: 22px; flex-wrap: wrap; }
+.wplan-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 6px;
+}
+.wplan-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 0.58rem; font-weight: 900;
+    letter-spacing: 2px; color: #92ff77;
+    text-transform: uppercase;
+    background: rgba(146,255,119,0.08);
+    border: 1px solid rgba(146,255,119,0.2);
+    padding: 2px 8px; border-radius: 4px;
+}
+.wplan-nav { display: flex; align-items: center; gap: 8px; }
+.wplan-nav-btn {
+    background: rgba(151,95,255,0.08);
+    border: 1px solid rgba(151,95,255,0.2);
+    color: #9757ff; width: 24px; height: 24px;
+    border-radius: 50%; font-size: 1rem;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+.wplan-nav-btn:hover:not(:disabled) {
+    background: rgba(151,95,255,0.2);
+    border-color: #9757ff;
+    box-shadow: 0 0 10px rgba(151,95,255,0.3);
+}
+.wplan-nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.wplan-week-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem; color: #cfb2ff;
+    min-width: 52px; text-align: center; font-weight: bold;
+}
+.wplan-grid {
+    display: grid; grid-template-columns: repeat(7,1fr); gap: 3px;
+    margin-bottom: 8px;
+}
+.wplan-day-btn {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(151,95,255,0.1);
+    border-radius: 6px; padding: 5px 2px;
+    cursor: pointer; display: flex;
+    flex-direction: column; align-items: center; gap: 2px;
+    transition: all 0.2s;
+}
+.wplan-day-btn:hover { border-color: rgba(151,95,255,0.4); background: rgba(151,95,255,0.08); }
+.wplan-day-btn.selected {
+    border-color: #9757ff;
+    background: rgba(151,95,255,0.15);
+    box-shadow: 0 0 10px rgba(151,95,255,0.25);
+}
+.wplan-day-btn.rest { opacity: 0.4; }
+.wplan-day-btn.rest.selected { opacity: 1; }
+.wplan-btn-num { font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; color: #ccc; }
+.wplan-btn-type { font-family: 'Courier New', monospace; font-size: 0.45rem; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; }
+
+.wplan-detail {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(151,95,255,0.15);
+    border-radius: 10px; padding: 14px;
+    flex: 1; display: flex; flex-direction: column; gap: 5px;
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.wplan-day-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem; color: #888;
+    letter-spacing: 3px; font-weight: 900;
+}
+.wplan-day-type {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem; font-weight: 900;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 5px; margin-bottom: 2px;
+}
+.wplan-day-desc { font-family: 'Courier New', monospace; font-size: 0.7rem; color: #aaa; margin: 0; font-style: italic; }
+.wplan-exercises { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.wplan-ex-item {
+    font-family: 'Courier New', monospace; font-size: 0.72rem; color: #ccc;
+    padding: 4px 8px; border-radius: 5px;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid rgba(151,95,255,0.2);
+    transition: all 0.15s;
+}
+.wplan-ex-item:hover { border-left-color: #9757ff; color: #cfb2ff; background: rgba(151,95,255,0.05); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DASHBOARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.dash-wrapper { max-width: 1060px; margin: 28px auto 70px; padding: 0 20px; display: flex; flex-direction: column; gap: 18px; }
+.dash-section { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 700px) { .dash-section { grid-template-columns: 1fr; } }
+
 .dash-card {
-    background: rgba(0,0,0,0.28);
-    border: 1px solid #2a0a5e;
-    border-bottom: 3px solid #4a148c;
-    border-radius: 8px;
-    padding: 26px;
-    flex: 1;
-    min-width: 260px;
-    transition: border-bottom-color 0.25s, transform 0.25s;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(151,95,255,0.12);
+    border-radius: 14px;
+    padding: 26px 24px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
-.dash-card:hover { border-bottom-color: #9757ff; transform: translateY(-3px); }
-.full-width { flex: 1 1 100%; }
+.dash-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(151,95,255,0.3), transparent);
+}
+.dash-card:hover { border-color: rgba(151,95,255,0.25); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.full-width { width: 100%; }
 
-.profile-card  { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-.profile-avatar { font-size: 3.5rem; }
-.profile-name  { color: #92ff77; font-size: 1.4rem; margin: 0 0 3px; font-family: 'Courier New', monospace; }
-.profile-email { color: #cfb2ff; font-size: 0.82rem; margin: 0 0 3px; font-family: 'Courier New', monospace; }
-.profile-joined { color: #555; font-size: 0.75rem; margin: 0; font-family: 'Courier New', monospace; }
-.dash-settings-link { display: inline-block; margin-top: 8px; font-size: 0.76rem; color: #9757ff; font-family: 'Courier New', monospace; text-decoration: none; }
+.profile-card { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.profile-avatar {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a0a5e, #6a1fa8);
+    border: 1px solid rgba(151,95,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: 900; color: #cfb2ff;
+    font-family: 'Courier New', monospace; flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(151,95,255,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.profile-name  { color: #e0e0e0; font-size: 1.3rem; margin: 0 0 3px; font-family: 'Courier New', monospace; font-weight: 900; }
+.profile-email { font-family: 'Courier New', monospace; font-size: 0.78rem; color: #999; margin: 0 0 3px; }
+.profile-joined { font-family: 'Courier New', monospace; font-size: 0.7rem; color: #777; margin: 0 0 10px; }
+.dash-settings-link {
+    font-family: 'Courier New', monospace; font-size: 0.72rem;
+    color: #9757ff; text-decoration: none; letter-spacing: 1px;
+    transition: color 0.2s;
+}
 .dash-settings-link:hover { color: #cfb2ff; }
 
-.mem-badge { display: inline-block; border: 2px solid; border-radius: 40px; padding: 7px 18px; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 14px; font-family: 'Courier New', monospace; }
-.mem-detail { display: flex; justify-content: space-between; font-size: 0.83rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #ccc; font-family: 'Courier New', monospace; }
-.mem-bar-wrap { margin-top: 12px; }
-.mem-bar { background: rgba(0,0,0,0.4); border-radius: 40px; height: 6px; overflow: hidden; margin-bottom: 4px; }
-.mem-bar-fill { height: 100%; border-radius: 40px; transition: width 0.5s; }
-.mem-bar-wrap small { color: #555; font-size: 0.72rem; font-family: 'Courier New', monospace; }
-
-.upgrade-link { display: inline-block; margin-top: 14px; font-size: 0.8rem; font-family: 'Courier New', monospace; text-decoration: none; font-weight: bold; transition: opacity 0.2s; }
-.upgrade-link:hover { opacity: 0.7; }
-.upgrade-notice { background: rgba(151,95,255,0.07); border: 1px solid #2a0a5e; border-left: 3px solid #4a148c; border-radius: 6px; padding: 12px 16px; color: #cfb2ff; font-size: 0.83rem; font-family: 'Courier New', monospace; margin-bottom: 18px; }
-
-/* ── CLASSES GRID ── */
-.classes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 14px; margin-top: 12px; }
-.class-card {
-    background: rgba(0,0,0,0.25);
-    border: 1px solid #2a0a5e;
-    border-bottom: 3px solid #4a148c;
-    border-radius: 7px;
-    padding: 14px;
-    display: flex; flex-direction: column; gap: 5px;
-    transition: border-bottom-color 0.25s, transform 0.2s;
+.mem-badge {
+    display: inline-block; border: 1px solid;
+    border-radius: 30px; padding: 6px 18px;
+    font-weight: bold; font-size: 0.78rem;
+    letter-spacing: 2px; margin-bottom: 16px;
+    font-family: 'Courier New', monospace;
+    backdrop-filter: blur(4px);
 }
-.class-card:hover { border-bottom-color: #9757ff; transform: translateY(-2px); }
-.class-card.booked { border-bottom-color: #92ff77; background: rgba(146,255,119,0.04); }
-.class-card.closed-class { opacity: 0.5; border-bottom-color: #ff4d4d; }
-.class-card.full { opacity: 0.5; }
-.class-day   { font-size: 0.67rem; color: #9757ff; letter-spacing: 2px; text-transform: uppercase; font-family: 'Courier New', monospace; }
-.class-name  { font-size: 0.95rem; font-weight: bold; color: #92ff77; font-family: 'Courier New', monospace; }
-.class-meta  { font-size: 0.76rem; color: #888; font-family: 'Courier New', monospace; }
-.class-slots { font-size: 0.78rem; font-weight: bold; color: #ccc; margin-top: 3px; font-family: 'Courier New', monospace; }
-.class-slots.low { color: #ff6b6b; }
-.class-status-badge { display: inline-block; padding: 2px 9px; border-radius: 30px; font-size: 0.68rem; font-weight: bold; letter-spacing: 1px; font-family: 'Courier New', monospace; }
-.class-status-badge.open   { background: rgba(146,255,119,0.1); color: #92ff77; border: 1px solid rgba(146,255,119,0.3); }
-.class-status-badge.closed { background: rgba(255,77,77,0.1);   color: #ff6b6b; border: 1px solid rgba(255,77,77,0.3); }
-.class-btn { margin-top: 6px; background: #9757ff; color: #fff; border: none; padding: 8px; border-radius: 40px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; font-family: 'Courier New', monospace; }
-.class-btn:hover:not([disabled]) { box-shadow: 0 0 10px rgba(151,95,255,0.4); transform: scale(1.03); }
-.class-btn[disabled] { background: #222; color: #555; cursor: not-allowed; }
-.cancel-btn { background: #3a0a7e; }
-.cancel-btn:hover { background: #ff4d4d !important; }
+.mem-detail {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem; padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #bbb; font-family: 'Courier New', monospace;
+}
+.mem-detail span:last-child { color: #ccc; }
 
-/* ── TOAST ── */
+.mem-bar-wrap { margin-top: 10px; }
+.mem-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; margin-bottom: 5px; }
+.mem-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; box-shadow: 0 0 8px currentColor; }
+.mem-bar-wrap small { font-size: 0.65rem; color: #888; font-family: 'Courier New', monospace; }
+
+.upgrade-link { display: inline-block; margin-top: 14px; font-size: 0.76rem; font-family: 'Courier New', monospace; text-decoration: none; font-weight: bold; transition: opacity 0.2s; letter-spacing: 1px; }
+.upgrade-link:hover { opacity: 0.7; }
+.upgrade-notice {
+    background: rgba(151,95,255,0.05);
+    border: 1px solid rgba(151,95,255,0.15);
+    border-left: 2px solid #9757ff;
+    border-radius: 8px; padding: 12px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem; color: #aaa; margin-bottom: 18px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CLASS CARDS — uiverse
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: 14px; margin-top: 4px;
+}
+.class-card {
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(151,95,255,0.1);
+    border-top: 2px solid rgba(151,95,255,0.2);
+    border-radius: 12px; padding: 16px;
+    display: flex; flex-direction: column; gap: 5px;
+    transition: border-top-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+}
+.class-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 0;
+    background: linear-gradient(to top, rgba(151,95,255,0.06), transparent);
+    transition: height 0.3s;
+}
+.class-card:hover { border-top-color: #9757ff; transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+.class-card:hover::after { height: 100%; }
+.class-card.booked { border-top-color: #92ff77; background: rgba(146,255,119,0.03); }
+.class-card.closed-class { opacity: 0.45; border-top-color: rgba(255,77,77,0.4); }
+.class-card.full { opacity: 0.45; }
+.class-day { font-size: 0.6rem; color: #b98aff; letter-spacing: 3px; text-transform: uppercase; font-family: 'Courier New', monospace; font-weight: 900; }
+.class-name { font-size: 0.92rem; font-weight: bold; color: #e0e0e0; font-family: 'Courier New', monospace; }
+.class-meta { font-size: 0.72rem; color: #999; font-family: 'Courier New', monospace; }
+.class-slots { font-size: 0.75rem; font-weight: bold; color: #bbb; margin-top: 2px; font-family: 'Courier New', monospace; }
+.class-slots.low { color: #ff6b6b; }
+.class-btn {
+    margin-top: 8px;
+    background: rgba(151,95,255,0.1);
+    color: #cfb2ff; border: 1px solid rgba(151,95,255,0.3);
+    padding: 8px; border-radius: 30px;
+    font-size: 0.7rem; font-weight: bold;
+    letter-spacing: 1px; cursor: pointer;
+    transition: all 0.25s; font-family: 'Courier New', monospace;
+    position: relative; z-index: 1;
+}
+.class-btn:hover:not([disabled]) {
+    background: rgba(151,95,255,0.25);
+    border-color: #9757ff;
+    box-shadow: 0 0 14px rgba(151,95,255,0.3);
+    color: #fff;
+}
+.class-btn[disabled] { background: rgba(255,255,255,0.02); color: #333; border-color: #1a1a1a; cursor: not-allowed; }
+.cancel-btn { background: rgba(255,77,77,0.08) !important; color: #ff6b6b !important; border-color: rgba(255,77,77,0.2) !important; }
+.cancel-btn:hover:not([disabled]) { background: rgba(255,77,77,0.2) !important; box-shadow: 0 0 14px rgba(255,77,77,0.2) !important; color: #fff !important; }
+
+.class-status-badge {
+    display: inline-block; font-family: 'Courier New', monospace;
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 2px;
+    padding: 2px 8px; border-radius: 4px; align-self: flex-start;
+}
+.class-status-badge.open   { background: rgba(146,255,119,0.08); color: #92ff77; border: 1px solid rgba(146,255,119,0.2); }
+.class-status-badge.closed { background: rgba(255,77,77,0.08);  color: #ff6b6b; border: 1px solid rgba(255,77,77,0.15); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOAST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .mojo-toast {
     position: fixed; bottom: 28px; left: 50%;
     transform: translateX(-50%) translateY(16px);
-    background: rgba(0,0,0,0.88);
-    padding: 11px 26px;
-    border-radius: 40px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.85rem; font-weight: bold;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.5);
-    z-index: 999999; opacity: 0;
-    pointer-events: none;
+    background: rgba(18,10,36,0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(151,95,255,0.25);
+    border-left: 3px solid #9757ff;
+    color: #cfb2ff;
+    font-family: 'Courier New', monospace; font-size: 0.8rem;
+    padding: 12px 24px; border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    z-index: 99999; opacity: 0; pointer-events: none;
     transition: opacity 0.3s, transform 0.3s;
-    border: 2px solid #4a148c;
-    white-space: nowrap; max-width: 90vw; text-align: center;
+    white-space: nowrap; max-width: 90vw; letter-spacing: 0.5px;
 }
-.mojo-toast.show    { opacity: 1; transform: translateX(-50%) translateY(0); }
-.mojo-toast.success { border-color: #92ff77; color: #92ff77; }
-.mojo-toast.error   { border-color: #ff6b6b; color: #ff6b6b; }
+.mojo-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.mojo-toast.success { border-left-color: #92ff77; color: #92ff77; }
+.mojo-toast.error   { border-left-color: #ff4d4d; color: #ff6b6b; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PROFILE AVATAR (big)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.profile-big-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #2a0a5e, #6a1fa8);
+    border: 1px solid rgba(151,95,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; font-weight: 900; color: #cfb2ff;
+    font-family: 'Courier New', monospace; flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(151,95,255,0.2);
+}

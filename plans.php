@@ -36,23 +36,23 @@ $current  = $plan_map[$user_plan] ?? 'FREE';
 
         <!-- FREE -->
         <div class="plan-card <?php echo $current==='FREE' ? 'current-plan' : ''; ?>">
-            <div class="free-tag">FREE</div>
+            <div class="plan-badge free">FREE</div>
             <div class="plan-price">
                 <span class="plan-amount">₱0</span>
                 <span class="plan-period">/forever</span>
             </div>
             <ul class="plan-perks">
-                <li class="perk-yes">✅ Basic gym access (limited hours)</li>
-                <li class="perk-yes">✅ View class schedule</li>
-                <li class="perk-no">❌ Class booking</li>
-                <li class="perk-no">❌ Member dashboard features</li>
-                <li class="perk-no">❌ Priority slots</li>
-                <li class="perk-no">❌ Personal trainer</li>
-                <li class="perk-no">❌ VIP lounge access</li>
-                <li class="perk-no">❌ Ad-free experience</li>
+                <li class="perk-yes">Basic gym access (limited hours)</li>
+                <li class="perk-yes">View class schedule</li>
+                <li class="perk-no">No class booking</li>
+                <li class="perk-no">No dashboard features</li>
+                <li class="perk-no">No priority slots</li>
+                <li class="perk-no">No personal trainer</li>
+                <li class="perk-no">No VIP lounge</li>
+                <li class="perk-no">No ad-free</li>
             </ul>
             <?php if ($current === 'FREE'): ?>
-                <button class="plan-btn current-btn" disabled>✅ CURRENT PLAN</button>
+                <button class="plan-btn current-btn" disabled>CURRENT PLAN</button>
             <?php elseif (!$is_logged): ?>
                 <button class="plan-btn free-btn" onclick="openSigninWithPlan('Free')">GET STARTED FREE</button>
             <?php else: ?>
@@ -62,23 +62,24 @@ $current  = $plan_map[$user_plan] ?? 'FREE';
 
         <!-- PREMIUM -->
         <div class="plan-card popular <?php echo $current==='PREMIUM' ? 'current-plan' : ''; ?>">
-            <div class="premium-tag">PREMIUM</div>
+            <div class="popular-tag">MOST POPULAR</div>
+            <div class="plan-badge quarterly">PREMIUM</div>
             <div class="plan-price">
                 <span class="plan-amount">₱999</span>
                 <span class="plan-period">/month</span>
             </div>
             <ul class="plan-perks">
-                <li class="perk-yes">✅ Full gym access</li>
-                <li class="perk-yes">✅ View class schedule</li>
-                <li class="perk-yes">✅ Class booking</li>
-                <li class="perk-yes">✅ Member dashboard</li>
-                <li class="perk-yes">✅ Priority slots</li>
-                <li class="perk-yes">✅ Personal trainer (2x/month)</li>
-                <li class="perk-no">❌ VIP lounge access</li>
-                <li class="perk-yes">✅ Ad-free experience</li>
+                <li class="perk-yes">Full gym access</li>
+                <li class="perk-yes">View class schedule</li>
+                <li class="perk-yes">Class booking</li>
+                <li class="perk-yes">Member dashboard</li>
+                <li class="perk-yes">Priority slots</li>
+                <li class="perk-yes">Personal trainer (2x/month)</li>
+                <li class="perk-no">No VIP lounge</li>
+                <li class="perk-yes">Ad-free experience</li>
             </ul>
             <?php if ($current === 'PREMIUM'): ?>
-                <button class="plan-btn current-btn" disabled>✅ CURRENT PLAN</button>
+                <button class="plan-btn current-btn" disabled>CURRENT PLAN</button>
             <?php elseif (!$is_logged): ?>
                 <button class="plan-btn quarterly-btn" onclick="openSigninWithPlan('Premium')">JOIN PREMIUM</button>
             <?php elseif ($current === 'FREE'): ?>
@@ -91,22 +92,23 @@ $current  = $plan_map[$user_plan] ?? 'FREE';
         <!-- VIP -->
         <div class="plan-card vip <?php echo $current==='VIP' ? 'current-plan' : ''; ?>">
             <div class="vip-tag">VIP</div>
+            <div class="plan-badge annual">VIP</div>
             <div class="plan-price">
                 <span class="plan-amount">₱1,999</span>
                 <span class="plan-period">/month</span>
             </div>
             <ul class="plan-perks">
-                <li class="perk-yes">✅ Full gym access</li>
-                <li class="perk-yes">✅ View class schedule</li>
-                <li class="perk-yes">✅ Class booking</li>
-                <li class="perk-yes">✅ Member dashboard</li>
-                <li class="perk-yes">✅ Priority slots</li>
-                <li class="perk-yes">✅ Personal trainer (unlimited)</li>
-                <li class="perk-yes">✅ VIP lounge access</li>
-                <li class="perk-yes">✅ Ad-free experience</li>
+                <li class="perk-yes">Full gym access</li>
+                <li class="perk-yes">View class schedule</li>
+                <li class="perk-yes">Class booking</li>
+                <li class="perk-yes">Member dashboard</li>
+                <li class="perk-yes">Priority slots</li>
+                <li class="perk-yes">Personal trainer (unlimited)</li>
+                <li class="perk-yes">VIP lounge access</li>
+                <li class="perk-yes">Ad-free experience</li>
             </ul>
             <?php if ($current === 'VIP'): ?>
-                <button class="plan-btn current-btn" disabled>✅ CURRENT PLAN</button>
+                <button class="plan-btn current-btn" disabled>CURRENT PLAN</button>
             <?php elseif (!$is_logged): ?>
                 <button class="plan-btn annual-btn" onclick="openSigninWithPlan('VIP')">GO VIP</button>
             <?php else: ?>

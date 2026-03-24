@@ -20,14 +20,14 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
     <span class="close-modal" onclick="document.getElementById('admin-panel').classList.remove('show')">&times;</span>
 
     <div class="admin-container">
-        <h2 class="form-title" style="margin-bottom:20px;">⚙️ EDIT HOMEPAGE</h2>
+        <h2 class="form-title" style="margin-bottom:20px;">EDIT HOMEPAGE</h2>
 
         <!-- TAB BUTTONS -->
         <div class="admin-tabs">
-            <button type="button" class="admin-tab active" onclick="switchTab('general',  this)">📋 General</button>
-            <button type="button" class="admin-tab"        onclick="switchTab('hours',    this)">🕐 Hours</button>
-            <button type="button" class="admin-tab"        onclick="switchTab('schedule', this)">🏋️ Schedule</button>
-            <button type="button" class="admin-tab"        onclick="switchTab('accounts', this)">👥 Accounts</button>
+            <button type="button" class="admin-tab active" onclick="switchTab('general',  this)">General</button>
+            <button type="button" class="admin-tab"        onclick="switchTab('hours',    this)">Hours</button>
+            <button type="button" class="admin-tab"        onclick="switchTab('schedule', this)">Schedule</button>
+            <button type="button" class="admin-tab"        onclick="switchTab('accounts', this)">Accounts</button>
         </div>
 
         <!-- ===== TAB: GENERAL ===== -->
@@ -35,22 +35,22 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
             <form id="admin-form-general">
                 <input type="hidden" name="action" value="update_home" />
                 <div class="admin-section">
-                    <label class="admin-label">📢 Announcement Banner <small>(leave blank to hide)</small></label>
+                    <label class="admin-label">Announcement Banner <small>(leave blank to hide)</small></label>
                     <input class="input" type="text" name="announcement"
                            value="<?php echo htmlspecialchars($content['announcement'] ?? ''); ?>"
                            placeholder="e.g. Gym closed Dec 25!" />
                 </div>
                 <div class="admin-section">
-                    <label class="admin-label">👥 Active Member Count</label>
+                    <label class="admin-label">Active Member Count</label>
                     <input class="input" type="number" name="active_members" min="0"
                            value="<?php echo htmlspecialchars($content['active_members'] ?? '120'); ?>" />
                 </div>
                 <div class="admin-section">
-                    <label class="admin-label">🗓️ Upcoming Events</label>
+                    <label class="admin-label">Upcoming Events</label>
                     <textarea class="input admin-textarea" name="upcoming_events"
                               placeholder="List upcoming events here..."><?php echo htmlspecialchars($content['upcoming_events'] ?? ''); ?></textarea>
                 </div>
-                <button type="submit" class="admin-save-btn">💾 SAVE GENERAL</button>
+                <button type="submit" class="admin-save-btn">SAVE GENERAL</button>
             </form>
         </div>
 
@@ -70,7 +70,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                             class="day-status-btn <?php echo $is_closed ? 'closed' : 'open'; ?>"
                             data-day="<?php echo $day; ?>"
                             onclick="toggleDayStatus(this)">
-                            <?php echo $is_closed ? '🔴 CLOSED' : '🟢 OPEN'; ?>
+                            <?php echo $is_closed ? 'CLOSED' : 'OPEN'; ?>
                         </button>
                         <input type="hidden" name="status_<?php echo $day; ?>"
                                value="<?php echo $day_status; ?>"
@@ -85,7 +85,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                     </div>
                     <?php endforeach; ?>
                 </div>
-                <button type="submit" class="admin-save-btn" style="margin-top:20px;">💾 SAVE HOURS</button>
+                <button type="submit" class="admin-save-btn" style="margin-top:20px;">SAVE HOURS</button>
             </form>
         </div>
 
@@ -95,12 +95,12 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                 <span class="admin-label" style="margin:0;">Manage gym class schedule</span>
                 <button type="button" class="admin-save-btn"
                         style="width:auto; padding:8px 18px; margin:0;"
-                        onclick="toggleAddForm()">➕ Add Class</button>
+                        onclick="toggleAddForm()">Add Class</button>
             </div>
 
             <!-- ADD CLASS FORM -->
             <div id="add-class-form" style="display:none;" class="add-class-box">
-                <p class="admin-label" style="font-weight:bold; color:#92ff77; margin-bottom:12px;">➕ NEW CLASS</p>
+                <p class="admin-label" style="font-weight:bold; color:#92ff77; margin-bottom:12px;">NEW CLASS</p>
                 <div class="class-form-grid">
                     <div>
                         <label class="admin-label">Class Name</label>
@@ -131,7 +131,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                         <input class="input" type="number" id="new-slots" value="20" min="1" max="100" />
                     </div>
                 </div>
-                <button type="button" class="admin-save-btn" style="margin-top:14px;" onclick="addClass()">💾 ADD CLASS</button>
+                <button type="button" class="admin-save-btn" style="margin-top:14px;" onclick="addClass()">ADD CLASS</button>
             </div>
 
             <!-- CLASS LIST -->
@@ -143,19 +143,19 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                     <button type="button"
                         class="class-status-btn <?php echo $cls_status; ?>"
                         onclick="toggleClassStatus(<?php echo $cls['id']; ?>, this)">
-                        <?php echo $cls_status === 'closed' ? '🔴' : '🟢'; ?>
+                        <?php echo $cls_status === 'closed' ? 'CLOSED' : 'OPEN'; ?>
                     </button>
                     <div class="schedule-info">
                         <span class="schedule-day-tag"><?php echo $cls['schedule_day']; ?></span>
                         <span class="schedule-name"><?php echo htmlspecialchars($cls['class_name']); ?></span>
                         <span class="schedule-meta">
-                            👤 <?php echo htmlspecialchars($cls['instructor']); ?> &nbsp;|&nbsp;
-                            🕐 <?php echo date('g:i A', strtotime($cls['start_time'])); ?>–<?php echo date('g:i A', strtotime($cls['end_time'])); ?> &nbsp;|&nbsp;
-                            🪑 <?php echo $cls['max_slots']; ?> slots
+                            <?php echo htmlspecialchars($cls['instructor']); ?> &nbsp;|&nbsp;
+                            <?php echo date('g:i A', strtotime($cls['start_time'])); ?>–<?php echo date('g:i A', strtotime($cls['end_time'])); ?> &nbsp;|&nbsp;
+                            <?php echo $cls['max_slots']; ?> slots
                         </span>
                     </div>
                     <button type="button" class="delete-class-btn"
-                            onclick="deleteClass(<?php echo $cls['id']; ?>, this)">🗑️</button>
+                            onclick="deleteClass(<?php echo $cls['id']; ?>, this)">DEL</button>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -181,7 +181,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
             <!-- SEARCH BAR -->
             <div class="acc-search-wrap">
                 <input type="text" id="account-search" class="input acc-search-input"
-                       placeholder="🔍  Search by username, email or plan..."
+                       placeholder="Search by username, email or plan..."
                        oninput="filterAccounts(this.value)" />
             </div>
 
@@ -210,7 +210,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
 
                     <!-- AVATAR -->
                     <div class="acc-avatar" style="background:<?php echo $is_admin_u ? 'rgba(151,95,255,0.2)' : 'rgba(0,230,118,0.1)'; ?>; border-color:<?php echo $is_admin_u ? '#9757ff' : '#4a148c'; ?>;">
-                        <?php echo $is_admin_u ? '🔐' : '🧠'; ?>
+                        <?php echo $is_admin_u ? '#' : '@'; ?>
                     </div>
 
                     <!-- INFO -->
@@ -241,10 +241,10 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
                     <div class="acc-actions">
                         <button type="button" class="acc-action-btn edit"
                                 onclick="openMembershipEditor(<?php echo $u['id']; ?>, '<?php echo htmlspecialchars($u['username']); ?>', '<?php echo $plan; ?>', '<?php echo $mem_status; ?>')"
-                                title="Edit membership">✏️</button>
+                                title="Edit membership">EDIT</button>
                         <button type="button" class="acc-action-btn delete"
                                 onclick="deleteUser(<?php echo $u['id']; ?>, '<?php echo htmlspecialchars($u['username']); ?>', this)"
-                                title="Delete account">🗑️</button>
+                                title="Delete account">DEL</button>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -264,7 +264,7 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
 <div id="membership-editor-modal" class="modal-overlay" style="z-index:100001;">
     <div class="mem-editor-box">
         <button type="button" class="close-modal" onclick="document.getElementById('membership-editor-modal').classList.remove('show')">&times;</button>
-        <p class="form-title" style="margin-bottom:4px;">✏️ EDIT MEMBERSHIP</p>
+        <p class="form-title" style="margin-bottom:4px;">EDIT MEMBERSHIP</p>
         <p id="mem-editor-username" style="color:#cfb2ff; font-size:0.85rem; font-family:'Courier New',monospace; margin-bottom:20px; text-align:center;"></p>
 
         <input type="hidden" id="mem-editor-user-id" />
@@ -291,6 +291,6 @@ $all_users = $users_res ? $users_res->fetch_all(MYSQLI_ASSOC) : [];
         </div>
         <input class="input" type="date" id="mem-editor-enddate" style="margin-top:10px;" />
 
-        <button type="button" class="admin-save-btn" style="margin-top:20px;" onclick="saveMembership()">💾 SAVE MEMBERSHIP</button>
+        <button type="button" class="admin-save-btn" style="margin-top:20px;" onclick="saveMembership()">SAVE MEMBERSHIP</button>
     </div>
 </div>

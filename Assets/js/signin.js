@@ -1,143 +1,105 @@
-// =============================================
-// THE MOJO MUSCLE - signin.js
-// =============================================
+// signin.js
 
+const signinModal = document.getElementById('signin-modal');
+const openBtn     = document.getElementById('open-signin-btn');
+const openBtn2    = document.getElementById('open-signin-btn-wplan');
+const closeBtn    = document.getElementById('close-modal');
+
+function openSigninModal(e) { e.preventDefault(); signinModal.classList.add('show'); }
+if (openBtn)  openBtn.addEventListener('click',  openSigninModal);
+if (openBtn2) openBtn2.addEventListener('click', openSigninModal);
+if (closeBtn) closeBtn.addEventListener('click', function() { signinModal.classList.remove('show'); });
+window.addEventListener('click', function(e) { if (e.target === signinModal) signinModal.classList.remove('show'); });
+
+// Open modal pre-selecting a plan
+function openSigninWithPlan(plan) {
+    document.getElementById('selected-plan').value = plan;
+    var display = document.getElementById('selected-plan-display');
+    var label   = document.getElementById('selected-plan-label');
+    if (plan !== 'Free') {
+        var icons = { Premium: '⭐', VIP: '👑' };
+        label.textContent = (icons[plan] || '') + ' ' + plan.toUpperCase() + ' PLAN';
+        display.style.display = 'block';
+    } else {
+        display.style.display = 'none';
+    }
+    document.getElementById('nav-signup').checked = true;
+    signinModal.classList.add('show');
+}
+
+// Toast
 function showToast(message, type) {
-    type = type || 'success';
     var toast = document.getElementById('mojo-toast');
     if (!toast) return;
     toast.textContent = message;
-    toast.className = 'mojo-toast ' + type + ' show';
-    setTimeout(function() { toast.classList.remove('show'); }, 4000);
+    toast.className   = 'mojo-toast ' + (type || '');
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 3500);
 }
 
-async function safeFetch(url, formData) {
-    var res  = await fetch(url, { method: 'POST', body: formData });
-    var text = await res.text();
-    try { return JSON.parse(text); }
-    catch(e) { console.error('=== PHP ERROR OUTPUT ===\n' + text); throw new Error('Server error — open Console for details.'); }
-}
-
-function getSiteRoot() {
-    if (typeof SITE_ROOT !== 'undefined') return SITE_ROOT;
-    var parts = window.location.pathname.split('/');
-    return window.location.origin + '/' + parts[1] + '/';
-}
-
-// ── OPEN MODAL WITH PLAN ─────────────────────────────────
-function openSigninWithPlan(plan) {
-    var modal = document.getElementById('signin-modal');
-    if (!modal) return;
-
-    // Set hidden plan input
-    var planInput   = document.getElementById('selected-plan');
-    var planDisplay = document.getElementById('selected-plan-display');
-    var planLabel   = document.getElementById('selected-plan-label');
-
-    if (planInput) planInput.value = plan;
-
-    if (plan && plan !== 'Free' && planDisplay && planLabel) {
-        var labels = { Monthly: '🟢 MONTHLY PLAN', Quarterly: '⭐ QUARTERLY PLAN', Annual: '👑 ANNUAL VIP PLAN' };
-        planLabel.textContent   = labels[plan] || plan;
-        planDisplay.style.display = 'block';
-    } else if (planDisplay) {
-        planDisplay.style.display = 'none';
-    }
-
-    // Switch to signup tab
-    var signupRadio = document.getElementById('nav-signup');
-    if (signupRadio) signupRadio.checked = true;
-
-    modal.classList.add('show');
-}
-
-// ── MODAL OPEN / CLOSE ───────────────────────────────────
-var openModalBtn  = document.getElementById('open-signin-btn');
-var signinModal   = document.getElementById('signin-modal');
-var closeModalBtn = document.getElementById('close-modal');
-
-if (openModalBtn && signinModal) {
-    openModalBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Default to login tab when clicking SIGN IN in navbar
-        var loginRadio = document.getElementById('nav-login');
-        if (loginRadio) loginRadio.checked = true;
-        signinModal.classList.add('show');
-    });
-}
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', function() { signinModal.classList.remove('show'); });
-}
-window.addEventListener('click', function(e) {
-    if (e.target === signinModal) signinModal.classList.remove('show');
-});
-
-// ── REGISTER ─────────────────────────────────────────────
+// Register
 var registerForm = document.getElementById('register-form');
 if (registerForm) {
-    registerForm.addEventListener('submit', async function(e) {
+    registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        var username = document.getElementById('username-sign-up').value.trim();
-        var password = document.getElementById('pwd-sign-up').value;
-        var confirm  = document.getElementById('confirm-pwd-sign-up').value;
-        var btn      = document.getElementById('register-btn');
-
-        if (username.length < 3) { showToast('Username must be at least 3 characters.', 'error'); return; }
-        if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
-            showToast('Password: 8+ chars, 1 uppercase, 1 number.', 'error'); return;
-        }
-        if (password !== confirm) { showToast('Passwords do not match!', 'error'); return; }
-
-        btn.textContent = 'DEPLOYING...'; btn.disabled = true;
-        try {
-            var data = await safeFetch(getSiteRoot() + 'handlers/register.php', new FormData(registerForm));
-            if (data.status === 'success') {
-                showToast('🧠 ' + data.message, 'success');
-                registerForm.reset();
-                document.getElementById('selected-plan-display').style.display = 'none';
-                setTimeout(function() { document.getElementById('nav-login').checked = true; }, 2000);
-            } else {
-                showToast('⚠️ ' + data.message, 'error');
-            }
-        } catch(err) { showToast('❌ ' + err.message, 'error'); }
-        btn.textContent = 'BECOME A MINION'; btn.disabled = false;
+        var pwd  = document.getElementById('pwd-sign-up').value;
+        var conf = document.getElementById('confirm-pwd-sign-up').value;
+        if (pwd !== conf) { showToast('Passwords do not match.', 'error'); return; }
+        var btn = document.getElementById('register-btn');
+        btn.disabled = true; btn.textContent = 'ENROLLING...';
+        fetch(SITE_ROOT + 'handlers/register.php', { method:'POST', body: new FormData(registerForm) })
+            .then(function(r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
+            .then(function(res) {
+                showToast(res.message, res.status);
+                if (res.status === 'success') {
+                    registerForm.reset();
+                    document.getElementById('selected-plan-display').style.display = 'none';
+                    var bar = document.getElementById('strength-bar');
+                    var lbl = document.getElementById('strength-label');
+                    if (bar) { bar.style.width = '0%'; }
+                    if (lbl) { lbl.textContent = ''; }
+                    document.getElementById('nav-login').checked = true;
+                }
+            })
+            .catch(function(err) { showToast('Connection error: ' + err.message, 'error'); })
+            .finally(function() { btn.disabled = false; btn.textContent = 'BECOME A MINION'; });
     });
 }
 
-// ── LOGIN ─────────────────────────────────────────────────
+// Login
 var loginForm = document.getElementById('login-form');
 if (loginForm) {
-    loginForm.addEventListener('submit', async function(e) {
+    loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var btn = document.getElementById('login-btn');
-        btn.textContent = 'ENTERING...'; btn.disabled = true;
-        try {
-            var data = await safeFetch(getSiteRoot() + 'handlers/login.php', new FormData(loginForm));
-            if (data.status === 'success') {
-                showToast('🔓 ' + data.message, 'success');
-                loginForm.reset();
-                signinModal.classList.remove('show');
-                setTimeout(function() {
-                    if (data.role === 'admin') {
-                        window.location.reload();
-                    } else {
-                        window.location.href = getSiteRoot() + 'dashboard.php';
-                    }
-                }, 1200);
-            } else {
-                showToast('⚠️ ' + data.message, 'error');
-            }
-        } catch(err) { showToast('❌ ' + err.message, 'error'); }
-        btn.textContent = 'ENTER LAIR'; btn.disabled = false;
+        btn.disabled = true; btn.textContent = 'ENTERING...';
+        fetch(SITE_ROOT + 'handlers/login.php', { method:'POST', body: new FormData(loginForm) })
+            .then(function(r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
+            .then(function(res) {
+                showToast(res.message, res.status);
+                if (res.status === 'success') {
+                    setTimeout(function() {
+                        window.location.href = res.role === 'admin' ? SITE_ROOT + 'HOME.php' : SITE_ROOT + 'dashboard.php';
+                    }, 1000);
+                }
+            })
+            .catch(function(err) { showToast('Connection error: ' + err.message, 'error'); })
+            .finally(function() { btn.disabled = false; btn.textContent = 'ENTER LAIR'; });
     });
 }
 
-// ── FORGOT PASSWORD ───────────────────────────────────────
+// Forgot password
 var forgotForm = document.getElementById('forgot-form');
 if (forgotForm) {
     forgotForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        showToast('📡 Recovery beam sent! (Coming soon)', 'success');
+        showToast('Recovery beam sent! (Feature coming soon)', 'success');
         forgotForm.reset();
     });
 }
