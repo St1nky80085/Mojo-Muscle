@@ -55,10 +55,10 @@
             <div class="social-box">
                 <h4>Follow The Lair</h4>
                 <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">YouTube</a>
+                    <a href="https://www.facebook.com/MojoMuscle" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/mojomuscleph/" target="_blank">Instagram</a>
+                    <a href="https://x.com/MojoMuscle_" target="_blank">X (Twitter)</a>
+                    <a href="https://www.youtube.com/channel/UChVxyHiB8CHLUns-mF57JCQ" target="_blank">YouTube</a>
                 </div>
             </div>
         </div>
