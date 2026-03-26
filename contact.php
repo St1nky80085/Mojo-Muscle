@@ -28,7 +28,7 @@
                 
                 <div>
                     <h4>Location</h4>
-                    <p>123 Townsville St.,<br>Mojo's Fortress, PH</p>
+                    <p>Sabang, Danao City, Cebu<br>Mojo's Fortress, PH</p>
                 </div>
             </div>
             <div class="info-card">
@@ -42,7 +42,7 @@
                 
                 <div>
                     <h4>Email</h4>
-                    <p>mojo@themojomuscle.com</p>
+                    <p>mojo.musclee@gmail.com</p>
                 </div>
             </div>
             <div class="info-card">
@@ -55,10 +55,16 @@
             <div class="social-box">
                 <h4>Follow The Lair</h4>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/MojoMuscle" target="_blank">Facebook</a>
-                    <a href="https://www.instagram.com/mojomuscleph/" target="_blank">Instagram</a>
-                    <a href="https://x.com/MojoMuscle_" target="_blank">X (Twitter)</a>
-                    <a href="https://www.youtube.com/channel/UChVxyHiB8CHLUns-mF57JCQ" target="_blank">YouTube</a>
+                    <style>
+                        .social-icon {
+                            width: 30px;
+                            height: 30px;
+                        }
+                    </style>
+                    <a href="https://www.facebook.com/MojoMuscle" target="_blank"><img src="Assets/image/fb.png" alt="Facebook Logo" class="social-icon"></a>
+                    <a href="https://www.instagram.com/mojomuscleph/" target="_blank"><img src="Assets/image/insta.png" alt="Instagram Logo" class="social-icon"></a>
+                    <a href="https://x.com/MojoMuscle_" target="_blank"><img src="Assets/image/twitter.png" alt="X Logo" class="social-icon"></a>
+                    <a href="https://www.youtube.com/channel/UChVxyHiB8CHLUns-mF57JCQ" target="_blank"><img src="Assets/image/youtube.png" alt="YouTube Logo" class="social-icon"></a>
                 </div>
             </div>
         </div>

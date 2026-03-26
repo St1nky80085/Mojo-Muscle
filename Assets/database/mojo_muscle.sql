@@ -56,6 +56,16 @@ CREATE TABLE IF NOT EXISTS home_content (
     updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- ── PASSWORD RESETS ───────────────────────────
+CREATE TABLE IF NOT EXISTS password_resets (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    email      VARCHAR(100) NOT NULL,
+    token      VARCHAR(64)  NOT NULL UNIQUE,
+    expires_at DATETIME     NOT NULL,
+    used       TINYINT(1)   DEFAULT 0,
+    created_at TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
+);
+
 -- ── DEFAULT HOME CONTENT ─────────────────────
 INSERT INTO home_content (content_key, content_value) VALUES
 ('active_members',    '120'),
