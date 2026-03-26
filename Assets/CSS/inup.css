@@ -1,190 +1,263 @@
-/* inup.css — FIXED MODAL STYLES */
+/* --- MOJO JOJO SIGN IN/UP THEME --- */
 
-/* ── OVERLAY ── */
+/* --- POP-UP MODAL STYLES --- */
 .modal-overlay {
-    display: none !important;
+    display: none; 
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(8px); 
+    z-index: 10000; 
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s;
-    padding: 20px;
-    box-sizing: border-box;
+    transition: opacity 0.3s ease;
 }
-.modal-overlay.show { display: flex !important; opacity: 1; }
+
+.modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
 
 .close-modal {
-    position: fixed; top: 20px; right: 28px;
-    font-size: 28px; color: #444;
-    cursor: pointer; transition: color 0.2s;
-    background: none; border: none; line-height: 1;
-    z-index: 10001;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 40px;
+    color: #92ff77; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
 }
-.close-modal:hover { color: #cfb2ff; }
 
-/* ── FORM CONTAINER ── */
+.close-modal:hover {
+    color: #cfb2ff; 
+    transform: scale(1.2);
+}
+
+.modal-overlay .form-container {
+    margin: 0 !important; 
+}
+
 .form-container {
-    position: relative;
-    perspective: 800px;
-    width: 100%;
-    max-width: 460px;
-    min-height: 200px;
-    font-family: 'Courier New', Courier, monospace;
-    flex-shrink: 0;
+  position: relative;
+  perspective: 50rem;
+  width: 100%;
+  max-width: 330px; 
+  height: 32rem; 
+  margin: auto;     
+  font-family: 'Courier New', Courier, monospace;
 }
-.hidden-radio { display: none; }
 
-/* ── ALL PANELS hidden by default ── */
+.hidden-radio {
+  display: none;
+}
+
+/* Updated to include the new forgot password form */
+.sign-up-form,
+.log-in-form,
+.forgot-pwd-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly; 
+}
+
+/* Updated to include the new forgot password container */
 .sign-up-container,
 .log-in-container,
 .forgot-pwd-container {
-    position: absolute; top: 0; left: 0; right: 0;
-    width: 100%;
-    display: flex; flex-direction: column;
-    background: rgba(20,12,40,0.97);
-    color: #e0e0e0;
-    padding: 36px 36px 30px;
-    border: 1px solid rgba(151,95,255,0.25);
-    border-radius: 16px;
-    box-sizing: border-box;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transition: transform 0.55s ease, opacity 0.55s ease, visibility 0.55s;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 1;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.7);
-    overflow: hidden;
-    gap: 10px;
-}
-.sign-up-container   { gap: 10px; }
-.log-in-container    { gap: 18px; }
-.forgot-pwd-container { gap: 24px; }
-
-/* shimmer line */
-.sign-up-container::before,
-.log-in-container::before,
-.forgot-pwd-container::before {
-    content: '';
-    position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(151,95,255,0.5), transparent);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background: #2d2d2d;
+  color: #e0e0e0;
+  padding: 1.5rem; 
+  border: 2px solid #4a148c;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.2); 
+  box-sizing: border-box; 
 }
 
-/* ── FORMS ── */
-.sign-up-form, .log-in-form, .forgot-pwd-form {
-    display: flex; flex-direction: column; gap: inherit;
-}
-
-/* ── TITLES ── */
 .form-title {
-    font-size: 1.6rem; font-weight: 900;
-    text-align: center; color: #cfb2ff;
-    letter-spacing: 3px; text-transform: uppercase;
-    margin: 0 0 2px;
-    text-shadow: 0 0 20px rgba(151,95,255,0.35);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  color: #92ff77; 
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
 }
+
 .switch-label {
-    font-size: 0.8rem; text-align: center;
-    color: #aaa; cursor: pointer;
-    margin: 0; transition: color 0.2s;
-    text-decoration: underline; display: block;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #cfb2ff; 
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  transition: color 0.3s;
 }
-.switch-label:hover { color: #9757ff; }
 
-/* ── LABELS ── */
+.switch-label:hover {
+  color: #92ff77;
+}
+
 :where(.sign-up-form, .log-in-form, .forgot-pwd-form) label {
-    font-size: 0.68rem; color: #bbb;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    margin-bottom: -2px;
+  font-size: 0.8rem;
+  padding-left: 0.25rem;
+  color: #cfb2ff;
+  margin-top: 2px;
 }
 
-/* ── INPUTS ── */
 :where(.sign-up-form, .log-in-form, .forgot-pwd-form) input {
-    background: rgba(255,255,255,0.04);
-    box-sizing: border-box; color: #e0e0e0;
-    border: none;
-    border-bottom: 1px solid rgba(151,95,255,0.2);
-    padding: 12px 10px;
-    border-radius: 6px 6px 0 0;
-    font-family: inherit; font-size: 0.9rem;
-    width: 100%; outline: none;
-    transition: all 0.25s;
-}
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus {
-    border-bottom-color: #9757ff;
-    background: rgba(151,95,255,0.06);
-}
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input::placeholder { color: #555; }
-
-/* ── SUBMIT BUTTONS ── */
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button[type="submit"] {
-    margin-top: 4px;
-    background: linear-gradient(135deg, #4a148c, #7b2fbe);
-    color: #fff; border: none;
-    padding: 14px; border-radius: 40px;
-    font-weight: bold; font-size: 0.9rem;
-    letter-spacing: 2px; cursor: pointer;
-    font-family: inherit; width: 100%;
-    box-shadow: 0 4px 20px rgba(74,20,140,0.5);
-    transition: all 0.3s;
-}
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(151,95,255,0.5);
-    background: linear-gradient(135deg, #7b2fbe, #9757ff);
+  background-color: rgba(0, 0, 0, 0.3); 
+  box-sizing: border-box;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #4a148c; 
+  padding: 0.6rem;
+  border-radius: 4px 4px 0 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
 }
 
-/* ── FORGOT PASSWORD LINK ── */
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus-visible {
+  outline: none;
+  border-bottom: 2px solid #92ff77; 
+  background-color: rgba(151, 95, 255, 0.1); 
+}
+
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button {
+  margin-top: 10px;
+  background-color: rgb(151, 95, 255);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 45px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(5, 5, 5, 0.212);
+  transition: all 0.3s ease;
+}
+
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(151, 95, 255, 0.6);
+}
+
 label.forgot-pwd {
-    font-size: 0.68rem; color: #888;
-    cursor: pointer; transition: color 0.2s;
-    text-decoration: underline; text-align: center; display: block;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: #cfb2ff;
+  margin-left: auto;
+  cursor: pointer;
 }
-label.forgot-pwd:hover { color: #9757ff; }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   3D FLIP — ACTIVE STATES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-/* Default positions — login visible, others hidden + absolute */
-.log-in-container    { transform: rotateY(0deg); opacity: 1; visibility: visible; z-index: 2; position: relative; }
-.sign-up-container   { transform: rotateY(-180deg); position: absolute; top: 0; left: 0; }
-.forgot-pwd-container { transform: rotateX(180deg); position: absolute; top: 0; left: 0; }
-
-/* LOGIN checked */
-#nav-login:checked ~ .log-in-container    { transform: rotateY(0deg); opacity: 1; visibility: visible; z-index: 2; position: relative; }
-#nav-login:checked ~ .sign-up-container   { transform: rotateY(-180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-#nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-
-/* SIGNUP checked */
-#nav-signup:checked ~ .sign-up-container   { transform: rotateY(0deg); opacity: 1; visibility: visible; z-index: 2; position: relative; }
-#nav-signup:checked ~ .log-in-container    { transform: rotateY(180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-#nav-signup:checked ~ .forgot-pwd-container { transform: rotateX(180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-
-/* FORGOT checked */
-#nav-forgot:checked ~ .forgot-pwd-container { transform: rotateX(0deg); opacity: 1; visibility: visible; z-index: 2; position: relative; }
-#nav-forgot:checked ~ .log-in-container     { transform: rotateX(-180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-#nav-forgot:checked ~ .sign-up-container    { transform: rotateY(-180deg); opacity: 0; visibility: hidden; z-index: 1; position: absolute; }
-
-/* ── EYE TOGGLE ── */
-.eye-toggle {
-    position: absolute; right: 8px; top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.82rem; cursor: pointer;
-    opacity: 0.3; color: #cfb2ff;
-    transition: opacity 0.2s;
-    user-select: none; line-height: 1;
+label.forgot-pwd:hover {
+  color: #92ff77;
 }
-.eye-toggle:hover { opacity: 0.9; }
 
-/* ── STRENGTH BAR ── */
-#strength-wrap { margin-top: -4px; }
+/* Social Login Area */
+.social-message {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
 
-/* ── SELECTED PLAN BADGE ── */
-#selected-plan-display { margin-bottom: 4px; }
+.line {
+  height: 1px;
+  flex: 1 1 0%;
+  background-color: #4a148c; 
+}
+
+.social-message .message {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  color: #cfb2ff;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.social-icons .icon {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 50%;
+  padding: 0.4rem;
+  margin: 0 5px;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.social-icons .icon:hover {
+  transform: translateY(-3px) scale(1.1);
+  background-color: rgba(146, 255, 119, 0.1);
+}
+
+.social-icons .icon svg {
+  height: 1.2rem;
+  width: 1.2rem;
+  fill: #92ff77; 
+}
+
+/* --- THE 3D FLIP ANIMATIONS --- */
+.sign-up-container,
+.log-in-container,
+.forgot-pwd-container {
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, visibility 0.6s;
+  backface-visibility: hidden;
+}
+
+/* BASE HIDDEN STATES */
+.log-in-container,
+.sign-up-container,
+.forgot-pwd-container {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* 1. LOGIN ACTIVE STATE */
+#nav-login:checked ~ .log-in-container {
+  transform: rotateY(0deg) rotateX(0deg);
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+#nav-login:checked ~ .sign-up-container { transform: rotateY(-180deg); } /* Pushed to the back */
+#nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); } /* Pushed to the bottom */
+
+/* 2. SIGN UP ACTIVE STATE */
+#nav-signup:checked ~ .sign-up-container {
+  transform: rotateY(0deg);
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+#nav-signup:checked ~ .log-in-container { transform: rotateY(180deg); }
+#nav-signup:checked ~ .forgot-pwd-container { transform: rotateX(180deg); }
+
+/* 3. FORGOT PASSWORD ACTIVE STATE */
+#nav-forgot:checked ~ .forgot-pwd-container {
+  transform: rotateX(0deg);
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+#nav-forgot:checked ~ .log-in-container { transform: rotateX(-180deg); }
+#nav-forgot:checked ~ .sign-up-container { transform: rotateY(-180deg); }
