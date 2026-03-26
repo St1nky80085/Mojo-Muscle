@@ -5,7 +5,13 @@ const openBtn     = document.getElementById('open-signin-btn');
 const openBtn2    = document.getElementById('open-signin-btn-wplan');
 const closeBtn    = document.getElementById('close-modal');
 
-function openSigninModal(e) { e.preventDefault(); signinModal.classList.add('show'); }
+function openSigninModal(e) {
+    e.preventDefault();
+    signinModal.classList.add('show');
+    setTimeout(function() {
+        if (typeof resizeFormContainer === 'function') resizeFormContainer();
+    }, 50);
+}
 if (openBtn)  openBtn.addEventListener('click',  openSigninModal);
 if (openBtn2) openBtn2.addEventListener('click', openSigninModal);
 if (closeBtn) closeBtn.addEventListener('click', function() { signinModal.classList.remove('show'); });
@@ -99,7 +105,15 @@ var forgotForm = document.getElementById('forgot-form');
 if (forgotForm) {
     forgotForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        showToast('Recovery beam sent! (Feature coming soon)', 'success');
-        forgotForm.reset();
+        var btn = document.getElementById('forgot-btn');
+        btn.disabled = true; btn.textContent = 'SENDING...';
+        fetch(SITE_ROOT + 'handlers/forgot_password.php', { method:'POST', body: new FormData(forgotForm) })
+            .then(function(r) { return r.json(); })
+            .then(function(res) {
+                showToast(res.message, res.status);
+                if (res.status === 'success') { forgotForm.reset(); }
+            })
+            .catch(function() { showToast('Something went wrong.', 'error'); })
+            .finally(function() { btn.disabled = false; btn.textContent = 'SEND RECOVERY BEAM'; });
     });
 }
