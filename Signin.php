@@ -7,6 +7,7 @@
 
         <!-- SIGN UP -->
         <div class="sign-up-container">
+            
             <span class="form-title">Sign Up</span>
             <div id="selected-plan-display" style="display:none; text-align:center; margin-bottom:4px;">
                 <span id="selected-plan-label" style="font-size:0.75rem; font-family:'Courier New',monospace; color:#92ff77; background:rgba(146,255,119,0.1); border:1px solid rgba(146,255,119,0.3); padding:3px 12px; border-radius:30px;"></span>
