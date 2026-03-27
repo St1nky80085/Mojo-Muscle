@@ -90,10 +90,10 @@ INSERT INTO home_content (content_key, content_value) VALUES
 -- Password: Admin@1234  (bcrypt hash)
 INSERT INTO users (username, email, password, role) VALUES
 ('MojoAdmin', 'admin@mojo.com',
- '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
+ '$2y$12$A/WiA8xPbpqGgOS5xRQn9ex5VNgT2aE/Clk5I.5UJz9IQ9.7tZ1iW',
  'admin');
 
--- NOTE: The hash above is for "password" (Laravel default test hash).
+-- NOTE: The hash above is for "Admin@1234" (bcrypt hash).
 -- To set your own password, run this after importing:
 --   UPDATE users SET password = '<your_bcrypt_hash>' WHERE username = 'MojoAdmin';
 -- Generate a hash with: php -r "echo password_hash('YourPassword123', PASSWORD_BCRYPT);"
