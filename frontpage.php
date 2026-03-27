@@ -41,7 +41,7 @@
         .front-tagline {
             font-family: 'Courier New', monospace;
             font-size: 0.82rem;
-            color: #555;
+            color: #ffffff;
             max-width: 340px;
             line-height: 1.75;
             margin: 0 auto 34px;
@@ -123,7 +123,7 @@
             <div class="circle"></div>
         </div>
     </div>
-
+    <div class="main-content">
     <div class="front-wrap">
         <p class="front-eyebrow">Est. 2026 &nbsp;—&nbsp; Townsville, PH</p>
         <img src="Assets/image/logo.png" alt="Mojo Muscle Logo" class="front-logo">
@@ -134,11 +134,6 @@
             <span></span>
         </div>
         <a href="HOME.php" id="start-btn" class="front-cta">GET STARTED</a>
-        <div class="front-stats">
-            <div class="front-stat"><strong>500+</strong><span>Members</span></div>
-            <div class="front-stat"><strong>15+</strong><span>Trainers</span></div>
-            <div class="front-stat"><strong>6</strong><span>Classes</span></div>
-            <div class="front-stat"><strong>24/7</strong><span>VIP Access</span></div>
         </div>
     </div>
 
