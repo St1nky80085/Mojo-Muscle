@@ -5,71 +5,86 @@
         <input type="radio" name="form-nav" id="nav-signup" class="hidden-radio" />
         <input type="radio" name="form-nav" id="nav-forgot" class="hidden-radio" />
 
-        <!-- SIGN UP -->
+        <!-- ═══ SIGN UP ═══ -->
         <div class="sign-up-container">
-            
             <span class="form-title">Sign Up</span>
-            <div id="selected-plan-display" style="display:none; text-align:center; margin-bottom:4px;">
-                <span id="selected-plan-label" style="font-size:0.75rem; font-family:'Courier New',monospace; color:#92ff77; background:rgba(146,255,119,0.1); border:1px solid rgba(146,255,119,0.3); padding:3px 12px; border-radius:30px;"></span>
+            <div id="selected-plan-display" style="display:none; text-align:center; margin-bottom:6px;">
+                <span id="selected-plan-label"></span>
             </div>
             <label for="nav-login" class="switch-label">Already have an account? Login</label>
+
             <form class="sign-up-form" id="register-form">
                 <input type="hidden" id="selected-plan" name="plan" value="Free" />
 
-                <label for="username-sign-up">Username</label>
-                <input placeholder="MojoMinion01" id="username-sign-up" name="username" type="text" required />
-
-                <label for="email-sign-up">Email</label>
-                <input placeholder="minion@mojojojo.com" id="email-sign-up" name="email" type="email" required />
-
-                <label for="pwd-sign-up">Password</label>
-                <div style="position:relative;">
-                    <input placeholder="Min 8 chars, 1 upper, 1 number" id="pwd-sign-up" name="password" type="password" required style="padding-right:30px;" oninput="checkStrength(this.value)" />
-                    <span class="eye-toggle" onclick="togglePw('pwd-sign-up',this)">👁</span>
-                </div>
-                <!-- PASSWORD STRENGTH BAR -->
-                <div id="strength-wrap" style="margin-top:4px;">
-                    <div id="strength-bar" style="height:3px; border-radius:2px; width:0%; transition:width 0.3s, background 0.3s; background:#ff4d4d;"></div>
-                    <span id="strength-label" style="font-size:0.6rem; font-family:'Courier New',monospace; color:#666; letter-spacing:1px;"></span>
+                <div class="field-group">
+                    <label for="username-sign-up">Username</label>
+                    <input placeholder="MojoMinion01" id="username-sign-up" name="username" type="text" required />
                 </div>
 
-                <label for="confirm-pwd-sign-up">Confirm Password</label>
-                <div style="position:relative;">
-                    <input placeholder="••••••••" id="confirm-pwd-sign-up" name="confirm_password" type="password" required style="padding-right:30px;" />
-                    <span class="eye-toggle" onclick="togglePw('confirm-pwd-sign-up',this)">👁</span>
+                <div class="field-group">
+                    <label for="email-sign-up">Email</label>
+                    <input placeholder="minion@mojojojo.com" id="email-sign-up" name="email" type="email" required />
                 </div>
 
-                <button type="submit" id="register-btn">BECOME A MINION</button>
+                <div class="field-group">
+                    <label for="pwd-sign-up">Password</label>
+                    <div class="pw-wrap">
+                        <input placeholder="Min 8 chars, 1 upper, 1 number" id="pwd-sign-up" name="password" type="password" required oninput="checkStrength(this.value)" />
+                        <span class="eye-toggle" onclick="togglePw('pwd-sign-up',this)">👁</span>
+                    </div>
+                    <div id="strength-wrap">
+                        <div id="strength-bar"></div>
+                        <span id="strength-label"></span>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="confirm-pwd-sign-up">Confirm Password</label>
+                    <div class="pw-wrap">
+                        <input placeholder="••••••••" id="confirm-pwd-sign-up" name="confirm_password" type="password" required />
+                        <span class="eye-toggle" onclick="togglePw('confirm-pwd-sign-up',this)">👁</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="register-btn">Become a Minion</button>
             </form>
         </div>
 
-        <!-- LOGIN -->
+        <!-- ═══ LOGIN ═══ -->
         <div class="log-in-container">
             <span class="form-title">Login</span>
             <label for="nav-signup" class="switch-label">Don't have an account? Sign Up</label>
-            <form class="log-in-form" id="login-form">
-                <label for="email-login">Email</label>
-                <input placeholder="minion@mojojojo.com" id="email-login" name="email" type="email" required />
 
-                <label for="pwd-login">Password</label>
-                <div style="position:relative;">
-                    <input placeholder="••••••••" id="pwd-login" name="password" type="password" required style="padding-right:30px;" />
-                    <span class="eye-toggle" onclick="togglePw('pwd-login',this)">👁</span>
+            <form class="log-in-form" id="login-form">
+                <div class="field-group">
+                    <label for="email-login">Email</label>
+                    <input placeholder="minion@mojojojo.com" id="email-login" name="email" type="email" required />
                 </div>
 
-                <button type="submit" id="login-btn">ENTER LAIR</button>
-                <label for="nav-forgot" class="switch-label">Forgot password?</label>
+                <div class="field-group">
+                    <label for="pwd-login">Password</label>
+                    <div class="pw-wrap">
+                        <input placeholder="••••••••" id="pwd-login" name="password" type="password" required />
+                        <span class="eye-toggle" onclick="togglePw('pwd-login',this)">👁</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="login-btn">Enter Lair</button>
+                <label for="nav-forgot" class="forgot-pwd">Forgot password?</label>
             </form>
         </div>
 
-        <!-- FORGOT PASSWORD -->
+        <!-- ═══ FORGOT PASSWORD ═══ -->
         <div class="forgot-pwd-container">
             <span class="form-title">Forgot Password</span>
             <label for="nav-login" class="switch-label">Remember it? Back to Login</label>
+
             <form class="forgot-pwd-form" id="forgot-form">
-                <label for="email-forgot">Email</label>
-                <input placeholder="minion@mojojojo.com" id="email-forgot" name="email" type="email" required />
-                <button type="submit" id="forgot-btn">SEND RECOVERY BEAM</button>
+                <div class="field-group">
+                    <label for="email-forgot">Email</label>
+                    <input placeholder="minion@mojojojo.com" id="email-forgot" name="email" type="email" required />
+                </div>
+                <button type="submit" id="forgot-btn">Send Recovery Beam</button>
             </form>
         </div>
     </div>
@@ -79,7 +94,6 @@
 <div id="mojo-toast" class="mojo-toast"></div>
 
 <script>
-// Resize container to match active panel height
 function resizeFormContainer() {
     var panels = [
         { radio: document.getElementById('nav-login'),  panel: document.querySelector('.log-in-container') },
@@ -90,7 +104,6 @@ function resizeFormContainer() {
     if (!container) return;
     for (var i = 0; i < panels.length; i++) {
         if (panels[i].radio && panels[i].radio.checked && panels[i].panel) {
-            // Temporarily make visible to measure
             var p = panels[i].panel;
             p.style.visibility = 'hidden';
             p.style.opacity = '0';
@@ -106,50 +119,42 @@ function resizeFormContainer() {
         }
     }
 }
-// Run on radio change
 document.querySelectorAll('.hidden-radio').forEach(function(r) {
     r.addEventListener('change', function() { setTimeout(resizeFormContainer, 30); });
 });
-// Run when modal becomes visible
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('signin-modal');
     if (!modal) return;
     var obs = new MutationObserver(function() {
-        if (modal.classList.contains('show')) {
-            setTimeout(resizeFormContainer, 40);
-        }
+        if (modal.classList.contains('show')) setTimeout(resizeFormContainer, 40);
     });
     obs.observe(modal, { attributes: true, attributeFilter: ['class'] });
     setTimeout(resizeFormContainer, 200);
 });
 
-// Show/hide password
 function togglePw(inputId, el) {
     var input = document.getElementById(inputId);
     if (input.type === 'password') {
-        input.type   = 'text';
+        input.type = 'text';
         el.style.opacity = '1';
-        el.style.color   = '#92ff77';
+        el.style.color = '#92ff77';
     } else {
-        input.type   = 'password';
-        el.style.opacity = '0.4';
-        el.style.color   = '#cfb2ff';
+        input.type = 'password';
+        el.style.opacity = '0.35';
+        el.style.color = '#cfb2ff';
     }
 }
 
-// Password strength checker
 function checkStrength(val) {
     var bar   = document.getElementById('strength-bar');
     var label = document.getElementById('strength-label');
     if (!bar) return;
-
     var score = 0;
-    if (val.length >= 8)              score++;
-    if (val.length >= 12)             score++;
-    if (/[A-Z]/.test(val))            score++;
-    if (/[0-9]/.test(val))            score++;
-    if (/[^A-Za-z0-9]/.test(val))     score++;
-
+    if (val.length >= 8)          score++;
+    if (val.length >= 12)         score++;
+    if (/[A-Z]/.test(val))        score++;
+    if (/[0-9]/.test(val))        score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
     var levels = [
         { pct:'0%',   color:'#333',    text:'' },
         { pct:'25%',  color:'#ff4d4d', text:'WEAK' },
