@@ -1,20 +1,21 @@
-/* --- MOJO JOJO SIGN IN/UP THEME --- */
+/* --- MOJO MUSCLE — UIVERSE-STYLE DARK PURPLE CARD --- */
 
-/* --- POP-UP MODAL STYLES --- */
+/* ── MODAL OVERLAY ── */
 .modal-overlay {
-    display: none; 
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7); 
-    backdrop-filter: blur(8px); 
-    z-index: 10000; 
+    background-color: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.35s ease;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -26,241 +27,356 @@
 
 .close-modal {
     position: absolute;
-    top: 20px;
-    right: 40px;
-    font-size: 40px;
-    color: #92ff77; 
-    font-weight: bold;
+    top: 22px;
+    right: 38px;
+    font-size: 30px;
+    color: rgba(200, 180, 255, 0.6);
+    font-weight: 400;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: color 0.25s, transform 0.25s;
+    z-index: 10001;
+    line-height: 1;
 }
 
 .close-modal:hover {
-    color: #cfb2ff; 
-    transform: scale(1.2);
+    color: #fff;
+    transform: scale(1.15) rotate(90deg);
+}
+
+/* ── FORM CONTAINER ── */
+.form-container {
+    position: relative;
+    perspective: 60rem;
+    width: 100%;
+    max-width: 410px;
+    margin: auto;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .modal-overlay .form-container {
-    margin: 0 !important; 
+    margin: 0 !important;
 }
-
-.form-container {
-  position: relative;
-  perspective: 50rem;
-  width: 100%;
-  max-width: 330px; 
-  height: 32rem; 
-  margin: auto;     
-  font-family: 'Courier New', Courier, monospace;
-}
-.hidden-radio { display: none; }
 
 .hidden-radio {
-  display: none;
+    display: none;
 }
 
-/* Updated to include the new forgot password form */
+/* ── INNER FORMS ── */
 .sign-up-form,
 .log-in-form,
 .forgot-pwd-form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-evenly; 
+    display: flex;
+    flex-direction: column;
 }
 
-/* Updated to include the new forgot password container */
+/* ── CARD PANELS — the Uiverse deep-purple look ── */
 .sign-up-container,
 .log-in-container,
 .forgot-pwd-container {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  inset: 0;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  background: #2d2d2d;
-  color: #e0e0e0;
-  padding: 1.5rem; 
-  border: 2px solid #4a148c;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 230, 118, 0.2); 
-  box-sizing: border-box; 
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    /* Deep purple card */
+    background: #200f3c;
+    border-radius: 20px;
+    border: 1px solid rgba(130, 80, 255, 0.22);
+    box-shadow:
+        0 0 0 1px rgba(100, 50, 220, 0.12),
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 80px rgba(90, 30, 180, 0.18);
+
+    padding: 38px 42px 36px;
+    box-sizing: border-box;
+    color: #e0d6ff;
+    gap: 0;
 }
 
+/* ── TITLE ── */
 .form-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  text-align: center;
-  color: #92ff77; 
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 0;
+    font-size: 1.55rem;
+    font-weight: 900;
+    text-align: center;
+    color: #cfb2ff;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
 }
 
+/* ── SWITCH / LINK LABELS ── */
 .switch-label {
-  font-size: 0.8rem;
-  text-align: center;
-  color: #cfb2ff; 
-  text-decoration: underline;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  transition: color 0.3s;
+    font-size: 0.76rem;
+    text-align: center;
+    color: rgba(190, 165, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    margin: 0 0 18px 0;
+    display: block;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
 }
 
 .switch-label:hover {
-  color: #92ff77;
+    color: #fff;
 }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) label {
-  font-size: 0.8rem;
-  padding-left: 0.25rem;
-  color: #cfb2ff;
-  margin-top: 2px;
+/* ── FIELD GROUP SPACING ── */
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) .field-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
 }
 
+/* ── LABELS ── */
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) label:not(.switch-label):not(.forgot-pwd) {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: rgba(190, 165, 255, 0.75);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    padding-left: 2px;
+    display: block;
+}
+
+/* ── INPUTS — Uiverse pill style ── */
 :where(.sign-up-form, .log-in-form, .forgot-pwd-form) input {
-  background-color: rgba(0, 0, 0, 0.3); 
-  box-sizing: border-box;
-  color: white;
-  border: none;
-  border-bottom: 2px solid #4a148c; 
-  padding: 0.6rem;
-  border-radius: 4px 4px 0 0;
-  font-family: inherit;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(130, 80, 255, 0.28);
+    border-radius: 10px;
+    padding: 11px 40px 11px 15px;
+    box-sizing: border-box;
+    color: #ede5ff;
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    caret-color: #cfb2ff;
 }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus-visible {
-  outline: none;
-  border-bottom: 2px solid #92ff77; 
-  background-color: rgba(151, 95, 255, 0.1); 
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input::placeholder {
+    color: rgba(180, 155, 230, 0.35);
 }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button {
-  margin-top: 10px;
-  background-color: rgb(151, 95, 255);
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 45px;
-  font-weight: bold;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(5, 5, 5, 0.212);
-  transition: all 0.3s ease;
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) input:focus {
+    background: rgba(130, 80, 255, 0.1);
+    border-color: rgba(150, 100, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(130, 80, 255, 0.15);
 }
 
-:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(151, 95, 255, 0.6);
+/* ── PASSWORD WRAPPER ── */
+.pw-wrap {
+    position: relative;
 }
 
-label.forgot-pwd {
-  font-size: 0.75rem;
-  text-decoration: underline;
-  color: #cfb2ff;
-  margin-left: auto;
-  cursor: pointer;
+.pw-wrap input {
+    padding-right: 42px;
+}
+
+/* ── EYE TOGGLE ── */
+.eye-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.35;
+    color: #cfb2ff;
+    user-select: none;
+    transition: opacity 0.2s, color 0.2s;
+    line-height: 1;
+}
+
+.eye-toggle:hover {
+    opacity: 1;
+    color: #92ff77;
+}
+
+/* ── PASSWORD STRENGTH BAR ── */
+#strength-wrap {
+    margin: 6px 0 4px;
+}
+
+#strength-bar {
+    height: 3px;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease, background 0.3s ease;
+    background: #ff4d4d;
+}
+
+#strength-label {
+    font-size: 0.6rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1.5px;
+    color: #666;
+    margin-top: 3px;
+    display: block;
+}
+
+/* ── SUBMIT BUTTON — Uiverse bright purple pill ── */
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button[type="submit"] {
+    width: 100%;
+    margin-top: 18px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #7b2ff7 0%, #9d4bff 60%, #b06bff 100%);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    box-shadow:
+        0 4px 24px rgba(120, 50, 240, 0.5),
+        0 1px 0 rgba(255,255,255,0.08) inset;
+}
+
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 32px rgba(130, 50, 255, 0.7),
+        0 1px 0 rgba(255,255,255,0.1) inset;
+    background: linear-gradient(135deg, #8c3fff 0%, #b060ff 60%, #c480ff 100%);
+}
+
+:where(.sign-up-form, .log-in-form, .forgot-pwd-form) button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ── FORGOT PASSWORD / BOTTOM LINK ── */
+label.forgot-pwd,
+.log-in-form .switch-label:last-child {
+    font-size: 0.72rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: rgba(190, 165, 255, 0.65);
+    text-align: center;
+    cursor: pointer;
+    margin-top: 14px;
+    display: block;
+    transition: color 0.2s;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 label.forgot-pwd:hover {
-  color: #92ff77;
+    color: #fff;
 }
 
-/* Social Login Area */
-.social-message {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+/* ── PLAN BADGE ── */
+#selected-plan-display {
+    text-align: center;
+    margin-bottom: 6px;
 }
 
-.line {
-  height: 1px;
-  flex: 1 1 0%;
-  background-color: #4a148c; 
+#selected-plan-label {
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    color: #92ff77;
+    background: rgba(146, 255, 119, 0.08);
+    border: 1px solid rgba(146, 255, 119, 0.22);
+    padding: 3px 14px;
+    border-radius: 30px;
+    letter-spacing: 1px;
 }
 
-.social-message .message {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  font-size: 0.75rem;
-  color: #cfb2ff;
+/* ── TOAST NOTIFICATION ── */
+.mojo-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: #200f3c;
+    color: #cfb2ff;
+    border: 1px solid rgba(140, 80, 255, 0.35);
+    padding: 12px 26px;
+    border-radius: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 99999;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.55);
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
+.mojo-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
-.social-icons .icon {
-  background-color: transparent;
-  box-shadow: none;
-  border-radius: 50%;
-  padding: 0.4rem;
-  margin: 0 5px;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.social-icons .icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  background-color: rgba(146, 255, 119, 0.1);
-}
-
-.social-icons .icon svg {
-  height: 1.2rem;
-  width: 1.2rem;
-  fill: #92ff77; 
-}
-
-/* --- THE 3D FLIP ANIMATIONS --- */
+/* ══════════════════════════════════════════
+   3D FLIP ANIMATIONS
+══════════════════════════════════════════ */
 .sign-up-container,
 .log-in-container,
 .forgot-pwd-container {
-  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, visibility 0.6s;
-  backface-visibility: hidden;
+    transition:
+        transform 0.58s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity   0.58s ease,
+        visibility 0.58s;
+    backface-visibility: hidden;
 }
 
-/* BASE HIDDEN STATES */
+/* Hidden by default */
 .log-in-container,
 .sign-up-container,
 .forgot-pwd-container {
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
 }
 
-/* 1. LOGIN ACTIVE STATE */
+/* 1 — LOGIN active */
 #nav-login:checked ~ .log-in-container {
-  transform: rotateY(0deg) rotateX(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+    transform: rotateY(0deg) rotateX(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
 }
-#nav-login:checked ~ .sign-up-container { transform: rotateY(-180deg); } /* Pushed to the back */
-#nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); } /* Pushed to the bottom */
+#nav-login:checked ~ .sign-up-container    { transform: rotateY(-180deg); }
+#nav-login:checked ~ .forgot-pwd-container { transform: rotateX(180deg); }
 
-/* 2. SIGN UP ACTIVE STATE */
+/* 2 — SIGN UP active */
 #nav-signup:checked ~ .sign-up-container {
-  transform: rotateY(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+    transform: rotateY(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
 }
-#nav-signup:checked ~ .log-in-container { transform: rotateY(180deg); }
+#nav-signup:checked ~ .log-in-container     { transform: rotateY(180deg); }
 #nav-signup:checked ~ .forgot-pwd-container { transform: rotateX(180deg); }
 
-/* 3. FORGOT PASSWORD ACTIVE STATE */
+/* 3 — FORGOT PASSWORD active */
 #nav-forgot:checked ~ .forgot-pwd-container {
-  transform: rotateX(0deg);
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+    transform: rotateX(0deg);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
 }
-#nav-forgot:checked ~ .log-in-container { transform: rotateX(-180deg); }
+#nav-forgot:checked ~ .log-in-container  { transform: rotateX(-180deg); }
 #nav-forgot:checked ~ .sign-up-container { transform: rotateY(-180deg); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+    .sign-up-container,
+    .log-in-container,
+    .forgot-pwd-container {
+        padding: 30px 24px 28px;
+        border-radius: 16px;
+    }
+    .form-title {
+        font-size: 1.3rem;
+        letter-spacing: 3px;
+    }
+}

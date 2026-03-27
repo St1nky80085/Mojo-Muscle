@@ -7,7 +7,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');       // Default XAMPP username
 define('DB_PASS', '');           // Default XAMPP password (empty)
-define('DB_NAME', 'mojo_muscle');
+define('DB_NAME', 'mojo_muscle'); // Database name
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
