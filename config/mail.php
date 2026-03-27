@@ -5,8 +5,8 @@
 // =============================================
 
 define('SITE_URL',      'http://localhost/New%20folder/Mojo-Muscle/');  // ← your live URL
-define('MAIL_FROM',     'mojo.musclee@gmail.com');          // ← your Gmail
-define('MAIL_PASSWORD', 'baki nyrb ppzx ldik');           // ← Gmail App Password
+define('MAIL_FROM',     'mojoo.muscle@gmail.com');          // ← your Gmail
+define('MAIL_PASSWORD', 'vauz oaqs ldxr pcnt');           // ← Gmail App Password
 define('MAIL_NAME',     'Mojo Muscle Gym');
 
 function sendMail($to_email, $to_name, $subject, $html_body) {
